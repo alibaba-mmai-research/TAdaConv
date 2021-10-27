@@ -1,0 +1,33 @@
+MODEL:
+  NAME: R2Plus1D
+VIDEO:
+  BACKBONE:
+    DEPTH: 10
+    META_ARCH: ResNet3D
+    NUM_INPUT_CHANNELS: 3
+    NUM_FILTERS: [64, 64, 128, 256, 512]
+    NUM_OUT_FEATURES: 512
+    KERNEL_SIZE: [
+      [3, 7, 7],
+      [3, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3]
+    ]
+    DOWNSAMPLING: [true, false, true, true, true]
+    DOWNSAMPLING_TEMPORAL: [false, false, true, true, true]
+    NUM_STREAMS: 1
+    EXPANSION_RATIO: 2
+    BRANCH:
+      NAME: R2Plus1DBranch
+    STEM:
+      NAME: R2Plus1DStem
+    NONLOCAL:
+      ENABLE: false
+      STAGES: [5]
+      MASK_ENABLE: false
+  HEAD:
+    NAME: BaseHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!

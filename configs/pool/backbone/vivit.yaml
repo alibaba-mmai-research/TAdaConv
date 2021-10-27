@@ -1,0 +1,32 @@
+MODEL:
+  NAME: vivit
+VIDEO:
+  BACKBONE:
+    META_ARCH: Transformer
+    NUM_FEATURES: 768
+    NUM_OUT_FEATURES: 768
+    PATCH_SIZE: 16
+    TUBELET_SIZE: 2
+    DEPTH: 12
+    NUM_HEADS: 12
+    DIM_HEAD: 64
+    ATTN_DROPOUT: 0.0
+    FF_DROPOUT: 0.0
+    DROP_PATH: 0.1
+    MLP_MULT: 4
+    STEM:
+      NAME: TubeletEmbeddingStem
+    BRANCH:
+      NAME: BaseTransformerLayer
+  HEAD:
+    NAME: TransformerHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!
+    PRE_LOGITS: false
+TRAIN:
+  CHECKPOINT_PRE_PROCESS:
+    ENABLE: true
+    POP_HEAD: true
+    POS_EMBED: repeat
+    PATCH_EMBD: central_frame

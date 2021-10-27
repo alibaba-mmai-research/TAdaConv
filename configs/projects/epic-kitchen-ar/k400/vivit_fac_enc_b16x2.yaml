@@ -1,0 +1,47 @@
+_BASE: ../vivit_fac_enc_k400.yaml
+TRAIN:
+  CHECKPOINT_PERIOD: 1
+  EVAL_PERIOD: 1
+  CHECKPOINT_FILE_PATH: "" # directory to the pretrained imagenet vit b16 224 model
+  FINE_TUNE: true
+OPTIMIZER:
+  BASE_LR: 0.0001
+  ADJUST_LR: false
+  LR_POLICY: cosine
+  MAX_EPOCH: 30
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.1
+  WARMUP_EPOCHS: 2.5
+  WARMUP_START_LR: 0.000001
+  OPTIM_METHOD: adamw
+  DAMPENING: 0.0
+  NESTEROV: true
+MODEL:
+  EMA:
+    ENABLE: true
+    DECAY: 0.999
+
+AUGMENTATION:
+  COLOR_AUG: true
+  BRIGHTNESS: 0.5
+  CONTRAST: 0.5
+  SATURATION: 0.5
+  HUE: 0.25
+  GRAYSCALE: 0.3
+  CONSISTENT: true
+  SHUFFLE: true
+  GRAY_FIRST: true
+  USE_GPU: false
+  MIXUP: 
+    ENABLE: true
+    ALPHA: 0.2
+    PROB: 1.0
+    MODE: batch
+    SWITCH_PROB: 0.5
+  LABEL_SMOOTHING: 0.1
+
+VIDEO:
+  HEAD:
+    DROPOUT_RATE: 0.0
+
+OUTPUT_DIR: output/vivit_fac_enc_k400

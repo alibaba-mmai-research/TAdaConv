@@ -1,0 +1,44 @@
+_BASE: ../csn_ek100.yaml
+TRAIN:
+  CHECKPOINT_PERIOD: 1
+  CHECKPOINT_FILE_PATH: "" # pretrained weights from K400/K700/IG65M...
+  FINE_TUNE: true
+  CHECKPOINT_PRE_PROCESS:
+    ENABLE: true
+    POP_HEAD: true
+    POS_EMBED: 
+    PATCH_EMBD: 
+AUGMENTATION:
+  COLOR_AUG: true
+  BRIGHTNESS: 0.5
+  CONTRAST: 0.5
+  SATURATION: 0.5
+  HUE: 0.25
+  GRAYSCALE: 0.0
+  CONSISTENT: true
+  SHUFFLE: false
+  GRAY_FIRST: false
+  USE_GPU: false
+  MIXUP: 
+    ENABLE: true
+    ALPHA: 0.2
+    PROB: 1.0
+    MODE: batch
+    SWITCH_PROB: 0.5
+  CUTMIX: 
+    ENABLE: true
+    ALPHA: 1.0
+    MINMAX: 
+  RANDOM_ERASING:
+    ENABLE: true
+    PROB: 0.25
+    MODE: pixel
+    COUNT: [1, 1]
+    NUM_SPLITS: 0
+    AREA_RANGE: [0.02, 0.33]
+    MIN_ASPECT: 0.3
+  LABEL_SMOOTHING: 0.2
+BN:
+  WB_LOCK: false
+  FREEZE: true
+OUTPUT_DIR: output/csn_ek100

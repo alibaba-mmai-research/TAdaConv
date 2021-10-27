@@ -1,0 +1,6 @@
+_BASE: ../vivit_fac_enc_k400.yaml
+TRAIN:
+  ENABLE: false
+  CHECKPOINT_FILE_PATH: "./checkpoints/vivit_fac_enc_b16x2_k400_32x224x224_7935_public.pyth"
+
+OUTPUT_DIR: output/vivit_fac_enc_k400_test

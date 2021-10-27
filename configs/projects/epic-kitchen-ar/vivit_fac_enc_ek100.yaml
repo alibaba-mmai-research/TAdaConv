@@ -1,0 +1,43 @@
+_BASE_RUN: ../../pool/run/training/from_scratch_large.yaml
+_BASE_MODEL: ../../pool/backbone/vivit_fac_enc.yaml
+
+PRETRAIN:
+  ENABLE: false
+TRAIN:
+  ENABLE: true
+  DATASET: epickitchen100
+  BATCH_SIZE: 8
+  CHECKPOINT_FILE_PATH: ""
+TEST:
+  ENABLE: true
+  DATASET: epickitchen100
+  BATCH_SIZE: 8
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/EPIC-KITCHENS-100/clips_512/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/EPIC-KITCHENS-100/annos/epic-kitchens-100-annotations-master/
+  NUM_INPUT_FRAMES: 32
+  SAMPLING_RATE: 2
+  MULTI_LABEL: true
+  TARGET_FPS: 60
+VIDEO:
+  HEAD:
+    NAME: TransformerHeadx2
+    NUM_CLASSES: [97, 300]
+    DROPOUT_RATE: 0.5
+
+DATA_LOADER:
+  NUM_WORKERS: 4
+
+OPTIMIZER:
+  BASE_LR: 0.0001
+  ADJUST_LR: false
+  LR_POLICY: cosine
+  MAX_EPOCH: 50
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.05
+  WARMUP_EPOCHS: 5
+  WARMUP_START_LR: 0.000001
+  OPTIM_METHOD: adamw
+  DAMPENING: 0.0
+  NESTEROV: true
+NUM_GPUS: 32

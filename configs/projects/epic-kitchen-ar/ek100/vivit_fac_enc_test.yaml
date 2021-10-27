@@ -1,0 +1,20 @@
+_BASE: ../vivit_fac_enc_ek100.yaml
+TRAIN:
+  ENABLE: false
+  CHECKPOINT_FILE_PATH: ./checkpoints/vivit_fac_enc_b16x2_pt_k700_ft_ek100_32x224x224_4630_public.pyth
+  CHECKPOINT_PRE_PROCESS:
+    ENABLE: true
+    POP_HEAD: true
+    POS_EMBED: super-resolution
+    PATCH_EMBD: 
+
+DATA:
+  TRAIN_JITTER_SCALES: [336, 448]
+  TRAIN_CROP_SIZE: 320
+  TEST_SCALE: 320
+  TEST_CROP_SIZE: 320
+
+DATA_LOADER:
+  NUM_WORKERS: 8
+
+OUTPUT_DIR: output/vivit_fac_enc_ek100_test

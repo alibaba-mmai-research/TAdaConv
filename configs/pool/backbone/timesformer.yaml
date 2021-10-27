@@ -1,0 +1,28 @@
+MODEL:
+  NAME: timesformer
+VIDEO:
+  BACKBONE:
+    META_ARCH: Transformer
+    NUM_FEATURES: 768
+    NUM_OUT_FEATURES: 768
+    PATCH_SIZE: 16
+    DEPTH: 12
+    NUM_HEADS: 12
+    DIM_HEAD: 64
+    ATTN_DROPOUT: 0.1
+    FF_DROPOUT: 0.1
+    DROP_PATH: 0.0
+    PRE_LOGITS: false
+    STEM:
+      NAME: PatchEmbedStem
+    BRANCH:
+      NAME: TimesformerLayer
+    NONLOCAL:
+      ENABLE: false
+      STAGES: [5]
+      MASK_ENABLE: false
+  HEAD:
+    NAME: TransformerHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!

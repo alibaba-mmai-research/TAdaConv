@@ -1,0 +1,12 @@
+_BASE: ../bmn_epic.yaml
+TRAIN:
+  ENABLE: true
+  BATCH_SIZE: 4
+  CHECKPOINT_FILE_PATH: ""
+TEST:
+  ENABLE: true
+  BATCH_SIZE: 4
+  TEST_CHECKPOINT: [9]
+  CHECKPOINT_FILE_PATH: ""
+OUTPUT_DIR: /mnt/data-nas/qingzhiwu/results/checkpoints/epic_tal/vvt-os/
+

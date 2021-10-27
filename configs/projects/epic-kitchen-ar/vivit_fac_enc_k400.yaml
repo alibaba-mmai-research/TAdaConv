@@ -1,0 +1,27 @@
+_BASE_RUN: ../../pool/run/training/from_scratch_large.yaml
+_BASE_MODEL: ../../pool/backbone/vivit_fac_enc.yaml
+
+PRETRAIN:
+  ENABLE: false
+TRAIN:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 8
+  CHECKPOINT_FILE_PATH: ""
+TEST:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 8
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  SAMPLING_RATE: 2
+  NUM_INPUT_FRAMES: 32
+VIDEO:
+  HEAD:
+    NUM_CLASSES: 400
+    DROPOUT_RATE: 0.5
+
+DATA_LOADER:
+  NUM_WORKERS: 4
+NUM_GPUS: 32

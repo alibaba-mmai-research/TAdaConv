@@ -1,0 +1,32 @@
+_BASE_RUN: ../../pool/run/training/mosi.yaml
+_BASE_MODEL: ../../pool/backbone/r2p1d.yaml
+
+TRAIN:
+  ENABLE: true
+  DATASET: UCF101
+  BATCH_SIZE: 5
+  LOG_FILE: training_log.log
+  EVAL_PERIOD: 5
+  NUM_FOLDS: 20
+  AUTO_RESUME: true
+  CHECKPOINT_PERIOD: 10
+  CHECKPOINT_FILE_PATH: ""          # !!@2
+  CHECKPOINT_TYPE: pytorch
+  CHECKPOINT_INFLATE: false
+  FINE_TUNE: false
+  ONLY_LINEAR: false
+TEST:
+  ENABLE: false
+  DATASET: UCF101
+  BATCH_SIZE: 5
+  NUM_SPATIAL_CROPS: 1
+  SPATIAL_CROPS: cc
+  NUM_ENSEMBLE_VIEWS: 1
+  LOG_FILE: val.log
+  CHECKPOINT_FILE_PATH: ""
+  CHECKPOINT_TYPE: pytorch
+  AUTOMATIC_MULTI_SCALE_TEST: false
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/ucf101/videos/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/ucf101/annotations/
+NUM_GPUS: 16

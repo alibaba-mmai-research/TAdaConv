@@ -1,0 +1,33 @@
+MODEL:
+  NAME: irCSN
+VIDEO:
+  BACKBONE:
+    DEPTH: 152
+    META_ARCH: ResNet3D
+    NUM_FILTERS: [64, 256, 512, 1024, 2048]
+    NUM_INPUT_CHANNELS: 3
+    NUM_OUT_FEATURES: 2048
+    KERNEL_SIZE: [
+      [3, 7, 7],
+      [3, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3]
+    ]
+    DOWNSAMPLING: [true, false, true, true, true]
+    DOWNSAMPLING_TEMPORAL: [false, false, true, true, true]
+    NUM_STREAMS: 1
+    EXPANSION_RATIO: 4
+    BRANCH:
+      NAME: CSNBranch
+    STEM:
+      NAME: DownSampleStem
+    NONLOCAL:
+      ENABLE: false
+      STAGES: [5]
+      MASK_ENABLE: false
+  HEAD:
+    NAME: BaseHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!

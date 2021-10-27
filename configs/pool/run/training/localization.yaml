@@ -1,0 +1,102 @@
+TASK_TYPE: localization
+LOCALIZATION:
+  ENABLE: true
+  LOSS: Tem+PemReg+PemCls
+  LOSS_WEIGHTS: [1,10,1]
+  POS_CLS_THRES: 0.9
+  POS_REG_THRES: 0.7
+  NEG_REG_THRES: 0.3
+
+  TEST_OUTPUT_DIR: ./output/
+  PROPS_DIR: prop_results
+  PROPS_REGRESSION_LOSS: smoothl1
+  RESULT_FILE: localization_detection_res
+  CLASSIFIER_FILE: ""
+  POST_PROCESS:
+    THREAD: 32
+    SOFT_NMS_ALPHA: 0.4
+    SOFT_NMS_LOW_THRES: 0.0
+    SOFT_NMS_HIGH_THRES: 0.0
+    PROP_NUM: 100
+    SELECT_SCORE: 0.0001
+    SCORE_TYPE: 'cr'
+    CLR_POWER: 1.2
+    REG_POWER: 1.2
+    IOU_POWER: 2.0
+    TCA_POWER: 1.0
+    ACTION_SCORE_POWER: 1.0
+    VIDEO_SCORES_WEIGHT: 1.0
+  
+TRAIN:
+  ENABLE: true
+  DATASET:  Epickitchen100Localization                        # !!@1
+  BATCH_SIZE: 64
+  LOG_FILE: training_log.log
+  EVAL_PERIOD: 1
+  NUM_FOLDS: 1
+  AUTO_RESUME: true
+  CHECKPOINT_PERIOD: 1
+  CHECKPOINT_FILE_PATH: ""          # !!@2
+  CHECKPOINT_TYPE: pytorch
+  CHECKPOINT_INFLATE: false
+  FINE_TUNE: false
+  LR_REDUCE: false
+TEST:
+  ENABLE: false                     # !!@3
+  OUTPUT_TEST: false
+  FORCE_FORWARD: false
+  DATASET: Epickitchen100Localization                         # !!@3
+  BATCH_SIZE: 128
+  LOG_FILE: val.log
+  TEST_SET: val
+  CHECKPOINT_FILE_PATH: ""
+  SAVE_RESULTS_PATH: "preds.log"
+  CHECKPOINT_TYPE: pytorch
+  AUTOMATIC_MULTI_SCALE_TEST: false
+  TEST_CHECKPOINT: [7,8,9,10]
+
+DATA:
+  DATA_ROOT_DIR: 
+  ANNO_DIR: 
+  TEMPORAL_SCALE: 200
+  DURATION_SCALE: -1
+  TEMPORAL_MODE: resize
+  NUM_INPUT_CHANNELS: 2304
+  TEMPORAL_INTERVAL: 0.53333333
+  NORM_FEATURE: true
+  ANNO_NAME: ""
+  LABELS_TYPE: bmn
+
+SOLVER:
+  BASE_LR: 0.001
+  ADJUST_LR: true
+  LR_POLICY: cosine
+  MAX_EPOCH: 10
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  WARMUP_EPOCHS: 1
+  WARMUP_START_LR: 0.0001
+  OPTIM_METHOD: adam
+  DAMPENING: 0.0
+  NESTEROV: true
+BN:
+  USE_BN: false
+  WEIGHT_DECAY: 0.0
+DATA_LOADER:
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+
+NUM_GPUS: 8
+SHARD_ID: 0
+NUM_SHARDS: 1
+RANDOM_SEED: 0
+OUTPUT_DIR: output/test
+OUTPUT_CFG_FILE: configuration.log
+LOG_PERIOD: 10
+DIST_BACKEND: nccl
+DEBUG_MODE: false
+LOG_MODEL_INFO: true
+LOG_CONFIG_INFO: true
+OSS:
+  ENABLE: false
+PAI: true

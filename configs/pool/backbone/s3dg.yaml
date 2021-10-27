@@ -1,0 +1,21 @@
+MODEL:
+  NAME: S3DG
+VIDEO:
+  BACKBONE:
+    META_ARCH: Inception3D
+    NUM_OUT_FEATURES: 1024
+    NUM_STREAMS: 1
+    BRANCH:
+      NAME: STConv3d
+      GATING: true
+    STEM:
+      NAME: STConv3d
+    NONLOCAL:
+      ENABLE: false
+      STAGES: [5]
+      MASK_ENABLE: false
+  HEAD:
+    NAME: BaseHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!

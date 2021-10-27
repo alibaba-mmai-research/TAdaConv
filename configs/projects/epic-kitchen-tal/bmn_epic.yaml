@@ -1,0 +1,81 @@
+_BASE_RUN: ../../pool/run/training/localization.yaml
+_BASE_MODEL: ../../pool/backbone/localization-conv.yaml
+
+TRAIN:
+  ENABLE: true
+  BATCH_SIZE: 16
+  DATASET: Epickitchen100Localization
+  CHECKPOINT_FILE_PATH:          # !!@2
+TEST:
+  ENABLE: true
+  BATCH_SIZE: 16
+  DATASET: Epickitchen100Localization
+
+LOCALIZATION:
+  ENABLE: true
+  LOSS: Tem+PemReg+PemCls
+  LOSS_WEIGHTS: [1,10,1,1]
+  TEST_OUTPUT_DIR: ./output/
+  PROPS_DIR: prop_results
+  RESULT_FILE: tal_detection_res
+  CLASSIFIER_FILE: 
+  POST_PROCESS:
+    PROP_NUM_RATIO: 2
+    THREAD: 32
+    SOFT_NMS_ALPHA: 0.4
+    SOFT_NMS_LOW_THRES: 0.25
+    SOFT_NMS_HIGH_THRES: 0.9
+    PROP_NUM_RATIO: 1.0
+    SELECT_SCORE: 0.0
+    SCORE_TYPE: 'cr'
+    CLR_POWER: 1.2
+    REG_POWER: 1.0
+    IOU_POWER: 2.0
+    ACTION_SCORE_POWER: 1.0
+    VIDEO_SCORES_WEIGHT: 1.0
+
+DATA:
+  DATA_ROOT_DIR: [/mnt/data-nas/qingzhiwu/dataset/epic-tal/features/features_s8_fps60_320_-1_train/]
+  ANNO_DIR: /mnt/data-nas/qingzhiwu/dataset/epic-tal/annotations/
+  VIDEO_LENGTH_FILE: epic_videos_len.txt
+  ANNO_NAME: "EPIC_100_validation.json"
+  TEMPORAL_SCALE: 200
+  DURATION_SCALE: 100
+  NUM_INPUT_CHANNELS: 6912
+  NORM_FEATURE: false
+  LABELS_TYPE: bmn
+  LOAD_TYPE: torch
+  CLIPS_LIST_FILE: 5s_clips.txt
+  TARGET_FPS: 60
+  NUM_INPUT_FRAMES: 32
+  SAMPLING_RATE: 2
+  CLIP_INTERVAL: 8
+  MULTI_LABEL: true
+  CLASSIFIER_ROOT_DIR: /mnt/data-nas/qingzhiwu/dataset/epic-tal/features/cls_res_s8_fps60_320_-1_train/
+  LOAD_CLASSIFIER_RES: true
+
+OPTIMIZER:
+  BASE_LR: 0.002
+  ADJUST_LR: true
+  LR_POLICY: cosine
+  MAX_EPOCH: 10
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  WARMUP_EPOCHS: 1
+  WARMUP_START_LR: 0.00001
+  OPTIM_METHOD: adamw
+  DAMPENING: 0.0
+  NESTEROV: true
+
+VIDEO:
+  HEAD:
+    NAME: BaseBMN
+    ACTIVATION: sigmoid
+    DROPOUT_RATE: 0
+    NUM_SAMPLE: 32
+    NUM_SAMPLE_PERBIN: 3
+    BOUNDARY_RATIO: 0.5
+    USE_BMN_REGRESSION: false
+
+LOG_PERIOD: 50
+USE_MULTISEG_VAL_DIST: true

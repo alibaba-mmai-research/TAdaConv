@@ -1,0 +1,4 @@
+_BASE: ../ft_r2p1d_ucf.yaml
+TRAIN:
+  CHECKPOINT_FILE_PATH: ./checkpoints/r2p1d_pt_ucf_mosi_public.pyth
+OUTPUT_DIR: output/r2p1d_mosi_ft_ucf

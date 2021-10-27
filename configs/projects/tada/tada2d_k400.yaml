@@ -1,0 +1,41 @@
+_BASE_RUN: ../../pool/run/training/from_scratch_large.yaml
+_BASE_MODEL: ../../pool/backbone/tada2d.yaml
+
+PRETRAIN:
+  ENABLE: false
+TRAIN:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 16
+  FINE_TUNE: true
+  CHECKPOINT_FILE_PATH: ""          # !!@2
+TEST:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 16
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  SAMPLING_RATE: 8
+  NUM_INPUT_FRAMES: 8
+  TEST_SCALE: 256
+  TEST_CROP_SIZE: 256
+VIDEO:
+  HEAD:
+    NUM_CLASSES: 400
+    DROPOUT_RATE: 0.5
+DATA_LOADER:
+  NUM_WORKERS: 8
+OPTIMIZER:
+  BASE_LR: 0.24
+  ADJUST_LR: false
+  LR_POLICY: cosine
+  MAX_EPOCH: 100
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  WARMUP_EPOCHS: 8
+  WARMUP_START_LR: 0.01
+  OPTIM_METHOD: sgd
+  DAMPENING: 0.0
+  NESTEROV: true
+NUM_GPUS: 16

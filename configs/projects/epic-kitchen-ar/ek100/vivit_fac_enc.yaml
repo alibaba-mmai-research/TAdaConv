@@ -1,0 +1,60 @@
+_BASE: ../vivit_fac_enc_ek100.yaml
+TRAIN:
+  CHECKPOINT_PERIOD: 1
+  EVAL_PERIOD: 1
+  CHECKPOINT_FILE_PATH: "" # directory of pretrained models
+  FINE_TUNE: true
+  BATCH_SIZE: 4
+  CHECKPOINT_PRE_PROCESS:
+    ENABLE: true
+    POP_HEAD: true
+    POS_EMBED: super-resolution
+    PATCH_EMBD: 
+
+DATA:
+  TRAIN_JITTER_SCALES: [336, 448]
+  TRAIN_CROP_SIZE: 320
+  TEST_SCALE: 320
+  TEST_CROP_SIZE: 320
+
+AUGMENTATION:
+  COLOR_AUG: true
+  BRIGHTNESS: 0.5
+  CONTRAST: 0.5
+  SATURATION: 0.5
+  HUE: 0.25
+  GRAYSCALE: 0.0
+  CONSISTENT: true
+  SHUFFLE: false
+  GRAY_FIRST: false
+  USE_GPU: false
+  MIXUP: 
+    ENABLE: true
+    ALPHA: 0.2
+    PROB: 1.0
+    MODE: batch
+    SWITCH_PROB: 0.5
+  CUTMIX: 
+    ENABLE: true
+    ALPHA: 1.0
+    MINMAX: 
+  RANDOM_ERASING:
+    ENABLE: true
+    PROB: 0.25
+    MODE: pixel
+    COUNT: [1, 1]
+    NUM_SPLITS: 0
+    AREA_RANGE: [0.02, 0.33]
+    MIN_ASPECT: 0.3
+  LABEL_SMOOTHING: 0.2
+
+VIDEO:
+  BACKBONE:
+    DROP_PATH: 0.2
+  HEAD:
+    DROPOUT_RATE: 0.0
+
+DATA_LOADER:
+  NUM_WORKERS: 8
+
+OUTPUT_DIR: output/vivit_fac_enc_ek100

@@ -1,0 +1,8 @@
+_BASE: ../csn_ek100.yaml
+TRAIN:
+  ENABLE: false
+  CHECKPOINT_FILE_PATH: ./checkpoints/csn152_pt_k700_ft_ek100_32x224x224_4452_public.pyth
+BN:
+  WB_LOCK: false
+  FREEZE: true
+OUTPUT_DIR: output/csn_ek100_test

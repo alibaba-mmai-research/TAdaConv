@@ -1,0 +1,7 @@
+_BASE: ../csn_ek100_submission.yaml
+TRAIN:
+  CHECKPOINT_FILE_PATH: ./checkpoints/csn152_pt_k700_ft_ek100_32x224x224_4452_public.pyth
+  BATCH_SIZE: 8
+TEST:
+  BATCH_SIZE: 8
+OUTPUT_DIR: output/csn_ek100_submit

@@ -1,0 +1,33 @@
+MODEL:
+  NAME: R2D3D
+VIDEO:
+  BACKBONE:
+    DEPTH: 18
+    META_ARCH: ResNet3D
+    NUM_FILTERS: [64, 64, 128, 256, 256]
+    NUM_INPUT_CHANNELS: 3
+    NUM_OUT_FEATURES: 256
+    KERNEL_SIZE: [
+      [1, 7, 7],
+      [1, 3, 3],
+      [1, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3]
+    ]
+    DOWNSAMPLING: [true, false, true, true, true]
+    DOWNSAMPLING_TEMPORAL: [false, false, false, true, true]
+    NUM_STREAMS: 1
+    EXPANSION_RATIO: 2
+    BRANCH:
+      NAME: R2D3DBranch
+    STEM:
+      NAME: DownSampleStem
+    NONLOCAL:
+      ENABLE: false
+      STAGES: [5]
+      MASK_ENABLE: false
+  HEAD:
+    NAME: BaseHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!

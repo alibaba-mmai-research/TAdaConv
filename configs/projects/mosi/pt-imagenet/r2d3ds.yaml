@@ -1,0 +1,6 @@
+_BASE: ../mosi_r2d3ds_imagenet.yaml
+TRAIN:
+  EVAL_PERIOD: 10
+PRETRAIN:
+  IMAGENET_DATA_SIZE: 5
+OUTPUT_DIR: output/r2d3ds_pt_imagenet

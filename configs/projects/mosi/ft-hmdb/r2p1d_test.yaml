@@ -1,0 +1,5 @@
+_BASE: ../ft_r2p1d_hmdb.yaml
+TRAIN:
+  ENABLE: false
+  CHECKPOINT_FILE_PATH: ./checkpoints/r2p1d_pt_hmdb_ft_hmdb_5183_public.pyth
+OUTPUT_DIR: output/r2p1d_mosi_ft_hmdb_test

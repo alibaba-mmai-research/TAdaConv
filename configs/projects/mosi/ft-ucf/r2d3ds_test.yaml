@@ -1,0 +1,5 @@
+_BASE: ../ft_r2d3ds_ucf.yaml
+TRAIN:
+  ENABLE: false
+  CHECKPOINT_FILE_PATH: ./checkpoints/r2d3ds_pt_ucf_ft_ucf_7175_public.pyth
+OUTPUT_DIR: output/r2d3ds_mosi_ft_ucf_test

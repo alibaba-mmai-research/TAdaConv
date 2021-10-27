@@ -1,0 +1,4 @@
+_BASE: ../mosi_r2p1d_ucf.yaml
+TRAIN:
+  EVAL_PERIOD: 10
+OUTPUT_DIR: output/r2p1d_pt_ucf

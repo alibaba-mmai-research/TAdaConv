@@ -1,0 +1,14 @@
+_BASE: ../tada2d_k400.yaml
+TRAIN:
+  FINE_TUNE: true
+  BATCH_SIZE: 8
+  CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
+  
+OPTIMIZER:
+  BASE_LR: 0.12
+
+DATA:
+  SAMPLING_RATE: 5
+  NUM_INPUT_FRAMES: 16
+
+OUTPUT_DIR: output/tada2d_16x5_k400

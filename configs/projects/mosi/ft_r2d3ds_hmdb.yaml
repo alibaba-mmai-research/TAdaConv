@@ -1,0 +1,26 @@
+_BASE_RUN: ../../pool/run/training/finetune.yaml
+_BASE_MODEL: ../../pool/backbone/r2d3ds.yaml
+
+PRETRAIN:
+  ENABLE: false
+TRAIN:
+  ENABLE: true
+  DATASET: HMDB51
+  CHECKPOINT_FILE_PATH: ""          # !!@2
+  BATCH_SIZE: 128
+TEST:
+  ENABLE: true
+  DATASET: HMDB51
+  BATCH_SIZE: 128
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/hmdb51/videos/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/hmdb51/anno_lists/
+  MINUS_INTERVAL: false
+VIDEO:
+  HEAD:
+    NUM_CLASSES: 51
+    DROPOUT_RATE: 0.5
+OPTIMIZER:
+  BASE_LR: 0.002
+  WARMUP_START_LR: 0.0002
+NUM_GPUS: 8

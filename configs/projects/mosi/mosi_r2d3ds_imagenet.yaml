@@ -1,0 +1,36 @@
+_BASE_RUN: ../../pool/run/training/mosi.yaml
+_BASE_MODEL: ../../pool/backbone/r2d3ds.yaml
+
+PRETRAIN:
+  IMAGENET_DATA_SIZE: 
+TRAIN:
+  ENABLE: true
+  DATASET: imagenet
+  BATCH_SIZE: 10
+  LOG_FILE: training_log.log
+  EVAL_PERIOD: 5
+  NUM_FOLDS: 20
+  AUTO_RESUME: true
+  CHECKPOINT_PERIOD: 10
+  CHECKPOINT_FILE_PATH: ""          # !!@2p
+  CHECKPOINT_TYPE: pytorch
+  CHECKPOINT_INFLATE: false
+  FINE_TUNE: false
+  ONLY_LINEAR: false
+TEST:
+  ENABLE: false
+  DATASET: imagenet
+  BATCH_SIZE: 10
+  NUM_SPATIAL_CROPS: 1
+  SPATIAL_CROPS: cc
+  NUM_ENSEMBLE_VIEWS: 1
+  LOG_FILE: val.log
+  CHECKPOINT_FILE_PATH: ""
+  CHECKPOINT_TYPE: pytorch
+  AUTOMATIC_MULTI_SCALE_TEST: false
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/imagenet/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/imagenet/
+  MEAN: [0.485, 0.456, 0.406]
+  STD: [0.229, 0.224, 0.225]
+NUM_GPUS: 16

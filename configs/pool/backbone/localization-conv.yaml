@@ -1,0 +1,10 @@
+MODEL:
+  NAME: BaseVideoModel
+VIDEO:
+  DIM1D: 256
+  DIM2D: 128
+  DIM3D: 512
+  BACKBONE_LAYER: 2
+  BACKBONE_GROUPS_NUM: 4
+  BACKBONE:
+    META_ARCH: SimpleLocalizationConv
