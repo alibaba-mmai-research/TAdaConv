@@ -11,7 +11,7 @@ The approaches implemented in this repo include but are not limited to the follo
 [[Project](projects/mosi/README.md)] [[Paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Huang_Self-Supervised_Motion_Learning_From_Static_Images_CVPR_2021_paper)] 
 **CVPR 2021**
 - A Stronger Baseline for Ego-Centric Action Detection <br>
-[[Project](projects/epic-kitchen-tal/README.md)] [[Paper]((https://arxiv.org/pdf/2106.06942))] 
+[[Project](projects/epic-kitchen-tal/README.md)] [[Paper](https://arxiv.org/pdf/2106.06942)] 
 **First-place** submission to [EPIC-KITCHENS-100 Action Detection Challenge](https://competitions.codalab.org/competitions/25926#results)
 - Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition <br>
 [[Project](projects/epic-kitchen-ar/README.md)] [[Paper](https://arxiv.org/pdf/2106.05058)] 

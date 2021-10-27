@@ -11,3 +11,5 @@ Here, we provide strong features for temporal action localization on HACS and Ep
 Annotations used for temporal action localization with our codebase can be found [here]().
 
 Pre-trained localization models using these features can be found in the [MODEL_ZOO.md](MODEL_ZOO.md).
+
+** The links for the features and classification results will be updated soon!
