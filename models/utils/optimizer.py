@@ -40,10 +40,15 @@ def construct_optimizer(model, cfg):
                 params.append(p)
         optim_params = [{"params": params, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY}]
     else:
-        bn_params = []                  # Batchnorm parameters.
-        head_parameters = []            # Head parameters
+        custom_parameters = []
+        custom_bias_parameters = []
+        custom_bn_parameters = []
+        bn_parameters = []              # Batchnorm parameters.
+        head_parameters = []            # Head parameters.
+        head_bias_parameters = []       # Head bias parameters.
         non_bn_parameters = []          # Non-batchnorm parameters.
-        no_weight_decay_parameters = [] # No weight decay parameters
+        non_bn_bias_parameters = []     # Non-batchnorm bias parameters.
+        no_weight_decay_parameters = [] # No weight decay parameters.
         no_weight_decay_parameters_names = []
         num_skipped_param = 0
         for name, p in model.named_parameters():
@@ -54,31 +59,59 @@ def construct_optimizer(model, cfg):
                 logger.info("Fixed weight: {}".format(name))
                 num_skipped_param += 1
                 continue
-            if "embd" in name or "cls_token" in name:
+            if "rf" in name:
+                if "bn" in name:
+                    custom_bn_parameters.append(p)
+                elif "bias" in name:
+                    custom_bias_parameters.append(p)
+                else:
+                    custom_parameters.append(p)
+            elif "embd" in name or "cls_token" in name:
                 no_weight_decay_parameters_names.append(name)
                 no_weight_decay_parameters.append(p)
             elif "bn" in name or "norm" in name:
-                bn_params.append(p)
+                bn_parameters.append(p)
             elif "head" in name:
-                head_parameters.append(p)
+                if "bias" in name:
+                    head_bias_parameters.append(p)
+                else:
+                    head_parameters.append(p)
             else:
-                non_bn_parameters.append(p)
+                if "bias" in name:
+                    non_bn_bias_parameters.append(p)
+                else:
+                    non_bn_parameters.append(p)
         optim_params = [
-            {"params": non_bn_parameters, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY, "lr_reduce": cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE},
-            {"params": head_parameters, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY},
-            {"params": no_weight_decay_parameters, "weight_decay": 0.0}
+            {"params": custom_parameters, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY, "lr_mult": 5 if (cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE) else 1},
+            {"params": custom_bias_parameters, "weight_decay": 0.0, "lr_mult": 10 if (cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE) else (2 if cfg.OPTIMIZER.BIAS_DOUBLE else 1)},
+            # normal params
+            {"params": non_bn_parameters, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY, "lr_mult": 1},
+            {"params": non_bn_bias_parameters, "weight_decay": 0.0, "lr_mult": 2 if cfg.OPTIMIZER.BIAS_DOUBLE else 1},
+            # head params
+            {"params": head_parameters, "weight_decay": cfg.OPTIMIZER.WEIGHT_DECAY, "lr_mult": 5 if (cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE) else 1},
+            {"params": head_bias_parameters, "weight_decay": 0.0, "lr_mult": 10 if (cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE) else (2 if cfg.OPTIMIZER.BIAS_DOUBLE else 1)},
+            # no weight decay params
+            {"params": no_weight_decay_parameters, "weight_decay": 0.0, "lr_mult": 1},
         ]
         if not cfg.BN.WB_LOCK:
-            optim_params = [{"params": bn_params, "weight_decay": cfg.BN.WEIGHT_DECAY, "lr_reduce": cfg.TRAIN.LR_REDUCE and cfg.TRAIN.FINE_TUNE}] + optim_params
+            optim_params = [
+                {"params": bn_parameters, "weight_decay": cfg.BN.WEIGHT_DECAY, "lr_mult": 1},
+                {"params": custom_bn_parameters, "weight_decay": cfg.BN.WEIGHT_DECAY, "lr_mult": 1},
+            ] + optim_params
         else:
             logger.info("Model bn/ln locked (not optimized).")
 
         # Check all parameters will be passed into optimizer.
-        assert len(list(model.parameters())) == len(non_bn_parameters) + \
-            len(bn_params) + \
+        assert len(list(model.parameters())) == len(custom_parameters) + \
+            len(custom_bias_parameters) + \
+            len(custom_bn_parameters) + \
+            len(non_bn_parameters) + \
+            len(non_bn_bias_parameters) + \
+            len(bn_parameters) + \
             len(head_parameters) + \
+            len(head_bias_parameters) + \
             len(no_weight_decay_parameters) + \
-            num_skipped_param, "parameter size does not match: {} + {} != {}".format(len(non_bn_parameters), len(bn_params), len(list(model.parameters())))
+            num_skipped_param, "parameter size does not match: {} + {} != {}".format(len(non_bn_parameters), len(bn_parameters), len(list(model.parameters())))
 
         logger.info(f"Optimized parameters constructed. Parameters without weight decay: {no_weight_decay_parameters_names}")
 
@@ -149,8 +182,8 @@ def set_lr(optimizer, new_lr):
         new_lr (float): the new learning rate to set.
     """
     for param_idx, param_group in enumerate(optimizer.param_groups):
-        if "lr_reduce" in param_group.keys() and param_group["lr_reduce"]:
+        if "lr_mult" in param_group.keys():
             # reduces the lr by a factor of 10 if specified for lr reduction
-            param_group["lr"] = new_lr / 10
+            param_group["lr"] = new_lr * param_group["lr_mult"]
         else:
             param_group["lr"] = new_lr

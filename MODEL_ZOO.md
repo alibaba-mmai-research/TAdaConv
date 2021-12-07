@@ -4,15 +4,15 @@
 
 | Dataset | architecture | depth | init | clips x crops | #frames x sampling rate | acc@1 | acc@5 | checkpoint | config |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-| K400 | TAda2D | R50 | IN-1K | 10 x 3 | 8 x 8 | 76.3 | 92.4 | [[google drive](https://drive.google.com/file/d/1-_Yek3lFYpgahU2Q2ITON4rgqm5Voj2E/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1CzJ82frDeH8P4L55aZdZ-Q)(code:jp7d)] |  configs/projects/tada/k400/tada2d_8x8.yaml |
-| K400 | TAda2D | R50 | IN-1K | 10 x 3 | 16 x 5 | 76.9 | 92.7 | [[google drive](https://drive.google.com/file/d/1Phj2mSna27Gv46tJzjw4a51_qum1HW6x/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1GQZmB_ZKwq1NjmVooICa2w)(code:buww)] | configs/projects/tada/k400/tada2d_16x5.yaml |
+| K400 | TAda2D | R50 | IN-1K | 10 x 3 | 8 x 8 | 76.7 | 92.6 | [[google drive](https://drive.google.com/file/d/19IJUDd0QXJjqWMnr5jkEQIvSQkFFNBge/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1CICBCmGEPcG96MX9wMuGFA)(code:9uaj)] |  configs/projects/tada/k400/tada2d_8x8.yaml |
+| K400 | TAda2D | R50 | IN-1K | 10 x 3 | 16 x 5 | 77.4 | 93.1 | [[google drive](https://drive.google.com/file/d/1d0kOT0UKkTImavTx5rOWjCXURhewmDlM/view?usp=sharing)][[baidu](https://pan.baidu.com/s/18uSFhOrNkJNaXlnQ4Jsijw)(code:5fnh)] | configs/projects/tada/k400/tada2d_16x5.yaml |
 | K400 | ViViT Fact. Enc. | B16x2 | IN-21K | 4 x 3 | 32 x 2 | 79.4 | 94.0 | [[google drive](https://drive.google.com/file/d/1xD4uij9DmZojnl1xuWBa-gwm5hUZxDc7/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1iVjKjEMm-6ymUd15ZNqvXw)(code:1t51)] | configs/projects/competition/k400/vivit_fac_enc_b16x2.yaml |
 
 ## Something-Something
 | Dataset | architecture | depth | init | clips x crops | #frames | acc@1 | acc@5 | checkpoint | config |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 8 | 63.8 | 87.7 | [[google drive](https://drive.google.com/file/d/1_OwuPjnVXNoOjkQ2q0NcmSWxCZJGgFTf/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1ITcHcYL6RCN2C7TP_v6cRg)(code:su94)] | configs/projects/tada/ssv2/tada2d_8f.yaml | 
-| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 16 | 65.2 | 89.1 | [[google drive](https://drive.google.com/file/d/1mwINu9ZFUMk1bHt47Xq9CDNnb07PCkG7/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1hXKpTSSpoVDBWpHWhKgjTg)(code:k03n)] | configs/projects/tada/ssv2/tada2d_16f.yaml | 
+| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 8 | 64.0 | 88.0 | [[google drive](https://drive.google.com/file/d/1llT-qRPD3CGfJ8wBDaYasl_QqYQ6Zqd9/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1s7xYZ6gv3jEwfaUkb0GBUg)(code:kp3q)] | configs/projects/tada/ssv2/tada2d_8f.yaml | 
+| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 16 | 65.6 | 89.1 | [[google drive](https://drive.google.com/file/d/13AQVpvPLz1vfjDVer2hnIvrkaIRn4Vwk/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1daFqlZ0p352ahEEr4Yq8DQ)(code:dt3d)] | configs/projects/tada/ssv2/tada2d_16f.yaml | 
 
 ## Epic-Kitchens Action Recognition
 
