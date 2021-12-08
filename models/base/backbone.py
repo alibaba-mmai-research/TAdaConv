@@ -11,7 +11,6 @@ from models.base.base_blocks import (
     Base3DResStage, STEM_REGISTRY, BRANCH_REGISTRY, InceptionBaseConv3D
 )
 from models.module_zoo.branches.s3dg_branch import InceptionBlock3D
-from models.utils.temporal_shift import make_temporal_shift
 from models.utils.init_helper import _init_convnet_weights
 
 BACKBONE_REGISTRY = Registry("Backbone")
