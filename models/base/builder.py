@@ -59,7 +59,7 @@ def build_model(cfg, gpu_id=None):
     try:
         # convert batchnorm to be synchronized across 
         # different GPUs if needed
-        sync_bn = cfg.BN.SYNC_BN
+        sync_bn = cfg.BN.SYNC
         if sync_bn == True and cfg.NUM_GPUS * cfg.NUM_SHARDS > 1:
             model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
     except:
