@@ -1,10 +1,10 @@
 # pytorch-video-understanding
 
-This repository provides the official pytorch implementation of the following papers for video classification and temporal localization. For more details on the respective paper, please refer to the [project pages](projects/).
+This repository provides the official pytorch implementation of the following papers for video classification and temporal localization. For more details on the respective paper, please refer to the [project folder](projects/). 
 
 ### Video/Action Classification
 
-**[TAda! Temporally-Adaptive Convolutions for Video Understanding](https://arxiv.org/pdf/2110.06178.pdf), ICLR 2022** <br>
+**[TAda! Temporally-Adaptive Convolutions for Video Understanding](https://arxiv.org/pdf/2110.06178.pdf), ICLR 2022** <br> [[Project](https://link.zhihu.com/?target=https%3A//tadaconv-iclr2022.github.io)]
 
 **[Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition](https://arxiv.org/pdf/2106.05058), CVPRW 2021**<br>
 *Rank 2 submission to [EPIC-KITCHENS-100 Action Recognition challenge](https://competitions.codalab.org/competitions/25923#results)<br>*
@@ -41,7 +41,7 @@ We include strong features for action localization on [HACS](http://hacs.csail.m
 
 # Contributors
 
-This codebase is written and maintained by [Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN) and [Xiang Wang](https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN). For a more comprehensive repository encompassing other works on video understanding from [DAMO Academy](https://damo.alibaba.com/?lang=en), please refer to [EssentialMC2](https://github.com/alibaba/EssentialMC2).
+This codebase is written and maintained by [Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN) and [Xiang Wang](https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN). For a more comprehensive repository encompassing other works on video understanding (such as open set problem and relation reasoning) from [DAMO Academy](https://damo.alibaba.com/?lang=en), please refer to [EssentialMC2](https://github.com/alibaba/EssentialMC2).
 
 If you find our codebase useful, please consider citing the respective work :).
 ```BibTeX
