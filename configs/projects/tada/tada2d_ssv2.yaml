@@ -5,13 +5,13 @@ PRETRAIN:
   ENABLE: false
 TRAIN:
   ENABLE: true
-  DATASET: kinetics400
+  DATASET: ssv2
   BATCH_SIZE: 16
   FINE_TUNE: true
   CHECKPOINT_FILE_PATH: ""
 TEST:
   ENABLE: true
-  DATASET: kinetics400
+  DATASET: ssv2
   BATCH_SIZE: 16
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/ssv2/

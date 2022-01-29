@@ -1,5 +1,5 @@
 # Towards training stronger video vision transformers for epic-kitchens-100 action recognition (CVPR 2021 Workshop)
-[Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN), Xiang Wang, Yutong Feng, [Shiwei Zhang](https://www.researchgate.net/profile/Shiwei-Zhang-14), Jianwen Jiang, Zhurong Xia, Mingqian Tang, Nong Sang, and [Marcelo Ang](https://www.eng.nus.edu.sg/me/staff/ang-jr-marcelo-h/). <br/>
+[Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN), Xiang Wang, Yutong Feng, [Shiwei Zhang](https://scholar.google.com/citations?user=ZO3OQ-8AAAAJ&hl=zh-CN&authuser=1), Jianwen Jiang, Zhurong Xia, Mingqian Tang, Nong Sang, and [Marcelo Ang](https://www.eng.nus.edu.sg/me/staff/ang-jr-marcelo-h/). <br/>
 In arXiv, 2021. [[Paper]](https://arxiv.org/pdf/2106.05058).
 
 # Running instructions

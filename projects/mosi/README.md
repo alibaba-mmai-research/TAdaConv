@@ -1,7 +1,9 @@
 # Self-supervised Motion Learning from Static Images (CVPR 2021)
-[Ziyuan Huang](https://huang-ziyuan.github.io/), [Shiwei Zhang](https://www.researchgate.net/profile/Shiwei-Zhang-14), Jianwen Jiang, Mingqian Tang,
+[Ziyuan Huang](https://huang-ziyuan.github.io/), [Shiwei Zhang](https://scholar.google.com/citations?user=ZO3OQ-8AAAAJ&hl=zh-CN&authuser=1), Jianwen Jiang, Mingqian Tang,
 [Rong Jin](https://www.cse.msu.edu/~rongjin/), [Marcelo Ang](https://www.eng.nus.edu.sg/me/staff/ang-jr-marcelo-h/), <br/>
-In CVPR, 2021. [[Paper]](https://openaccess.thecvf.com/content/CVPR2021/papers/Huang_Self-Supervised_Motion_Learning_From_Static_Images_CVPR_2021_paper.pdf).
+In CVPR, 2021. 
+
+[[Paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Huang_Self-Supervised_Motion_Learning_From_Static_Images_CVPR_2021_paper.pdf)]
 
 # Running instructions
 To train the model with MoSI, set the `_BASE_RUN` to point to `configs/pool/run/training/mosi.yaml`. See `configs/projects/mosi/mosi_*.yaml` for more details. Alternatively, you can also find some pre-trained model in the `MODEL_ZOO.md`.

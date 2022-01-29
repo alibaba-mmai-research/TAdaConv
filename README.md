@@ -1,24 +1,29 @@
-# pytorch-video-understanding
+<!-- # pytorch-video-understanding -->
+# TAda! TAdaConv for Video Understanding
 
 This repository provides the official pytorch implementation of the following papers for video classification and temporal localization. For more details on the respective paper, please refer to the [project folder](projects/). 
 
 ### Video/Action Classification
 
-**[TAda! Temporally-Adaptive Convolutions for Video Understanding](https://arxiv.org/pdf/2110.06178.pdf), ICLR 2022** <br> [[Project](https://link.zhihu.com/?target=https%3A//tadaconv-iclr2022.github.io)]
+- **[TAda! Temporally-Adaptive Convolutions for Video Understanding](https://arxiv.org/pdf/2110.06178.pdf), ICLR 2022 [[Website](https://tadaconv-iclr2022.github.io)]**<br> 
 
-**[Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition](https://arxiv.org/pdf/2106.05058), CVPRW 2021**<br>
-*Rank 2 submission to [EPIC-KITCHENS-100 Action Recognition challenge](https://competitions.codalab.org/competitions/25923#results)<br>*
+- **[Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition](https://arxiv.org/pdf/2106.05058), CVPRW 2021**<br>
+*Rank 2 submission to [EPIC-KITCHENS-100 Action Recognition challenge](https://competitions.codalab.org/competitions/25923#results)*
 
 ### Self-supervised video representation learning
 
-**[Self-supervised Motion Learning from Static Images](https://openaccess.thecvf.com/content/CVPR2021/papers/Huang_Self-Supervised_Motion_Learning_From_Static_Images_CVPR_2021_paper), CVPR 2021**<br>
+- **[Self-supervised Motion Learning from Static Images](https://openaccess.thecvf.com/content/CVPR2021/papers/Huang_Self-Supervised_Motion_Learning_From_Static_Images_CVPR_2021_paper), CVPR 2021**<br>
 
-**[ParamCrop: Parametric Cubic Cropping for Video Contrastive Learning](https://arxiv.org/abs/2108.10501), arXiv 2021** (upcoming) <br>
+- **[ParamCrop: Parametric Cubic Cropping for Video Contrastive Learning](https://arxiv.org/abs/2108.10501), arXiv 2021** (upcoming) <br>
 
 ### Temporal Action Localization
 
-**[A Stronger Baseline for Ego-Centric Action Detection](https://arxiv.org/pdf/2106.06942), CVPRW 2021**<br>
-*Rank 1 submission to [EPIC-KITCHENS-100 Action Detection Challenge](https://competitions.codalab.org/competitions/25926#results)<br>*
+- **[A Stronger Baseline for Ego-Centric Action Detection](https://arxiv.org/pdf/2106.06942), CVPRW 2021**<br>
+*Rank 1 submission to [EPIC-KITCHENS-100 Action Detection Challenge](https://competitions.codalab.org/competitions/25926#results)*
+
+# About
+
+This repository is released as part of the video understanding project [EssentialMC2](https://github.com/alibaba/EssentialMC2) from [DAMO Academy](https://damo.alibaba.com/?lang=en). [EssentialMC2](https://github.com/alibaba/EssentialMC2) provides industry-level solutions to video understanding problems, which includes representation learning, relation reasoning and openset life-long learning. 
 
 # Latest
 
@@ -41,8 +46,9 @@ We include strong features for action localization on [HACS](http://hacs.csail.m
 
 # Contributors
 
-This codebase is written and maintained by [Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN) and [Xiang Wang](https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN). For a more comprehensive repository encompassing other works on video understanding (such as open set problem and relation reasoning) from [DAMO Academy](https://damo.alibaba.com/?lang=en), please refer to [EssentialMC2](https://github.com/alibaba/EssentialMC2).
+This codebase is written and maintained by [Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN) and [Xiang Wang](https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN). 
 
+## Citations
 If you find our codebase useful, please consider citing the respective work :).
 ```BibTeX
 @inproceedings{huang2021tada,

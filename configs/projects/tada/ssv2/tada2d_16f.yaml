@@ -5,4 +5,4 @@ TRAIN:
   CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
 DATA:
   NUM_INPUT_FRAMES: 16
-OUTPUT_DIR: output/tada2d_k400_16f
+OUTPUT_DIR: output/tada2d_ssv2_16f
