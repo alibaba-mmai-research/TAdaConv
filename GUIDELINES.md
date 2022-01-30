@@ -37,6 +37,23 @@ Here we provide a table summarizing all the name and the formats of the datasets
 
 For epic-kitchens-features, the file name is specified in the respective configs in `configs/projects/epic-kitchen-tal`.
 
+### Preprocessing Something-Something-V2 dataset
+
+We found the the video decoder we use [decord](https://github.com/dmlc/decord) has difficulty in decoding the original webm files. So we provide a script for preprocessing the `.webm` files in the original something-something-v2 dataset to `.mp4` files. To do this, simply run:
+
+```bash
+python datasets/utils/preprocess_ssv2_annos.py --anno --anno_path path_to_your_annotation
+python datasets/utils/preprocess_ssv2_annos.py --data --data_path path_to_your_ssv2_videos --data_out_path path_to_put_output_videos
+```
+
+Remember to make sure the annotation files are organized as follows:
+```
+-- path_to_your_annotation
+    -- something-something-v2-train.json
+    -- something-something-v2-validation.json
+    -- something-something-v2-labels.json
+```
+
 ## Running
 
 The entry file for all the runs are `runs/run.py`. 

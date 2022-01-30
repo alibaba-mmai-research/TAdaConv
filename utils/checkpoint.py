@@ -20,6 +20,8 @@ import utils.bucket as bu
 import utils.distributed as du
 import utils.logging as logging
 
+from torch.hub import tqdm, load_state_dict_from_url as load_url
+
 logger = logging.get_logger(__name__)
 
 
@@ -297,16 +299,20 @@ def load_checkpoint(
     Returns:
         (int): the number of training epoch of the checkpoint.
     """
-    assert os.path.exists(
-        path_to_checkpoint
-    ), "Checkpoint '{}' not found".format(path_to_checkpoint)
     # Account for the DDP wrapper in the multi-gpu setting.
     ms = model.module if data_parallel else model
     if model_ema is not None:
         ms_ema = model_ema.module if data_parallel else model_ema
-    # Load the checkpoint on CPU to avoid GPU mem spike.
-    with open(path_to_checkpoint, "rb") as f:
-        checkpoint = torch.load(f, map_location="cpu")
+    if path_to_checkpoint[:5] == 'https':
+        checkpoint = load_url(path_to_checkpoint)
+        checkpoint = convert_imagenet_weights(cfg, checkpoint, ms)
+    else:
+        assert os.path.exists(
+            path_to_checkpoint
+        ), "Checkpoint '{}' not found".format(path_to_checkpoint)
+        # Load the checkpoint on CPU to avoid GPU mem spike.
+        with open(path_to_checkpoint, "rb") as f:
+            checkpoint = torch.load(f, map_location="cpu")
     model_state_dict_3d = (
         model.module.state_dict() if data_parallel else model.state_dict()
     )
@@ -571,7 +577,98 @@ def load_train_checkpoint(cfg, model, model_ema, optimizer, model_bucket=None):
         start_epoch = 0 if cfg.TRAIN.FINE_TUNE else (checkpoint_epoch + 1)
         if read_from_oss:
             bu.clear_tmp_file(checkpoint_path)
+    elif cfg.TRAIN.CHECKPOINT_FILE_PATH == "" and cfg.TRAIN.CHECKPOINT_DOWNLOAD_IMGNET:
+        if cfg.VIDEO.BACKBONE.META_ARCH == "ResNet3D":
+            model_urls = {
+                'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+                'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+                'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+                'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+                'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+            }
+            ckp_to_download = f"resnet{cfg.VIDEO.BACKBONE.DEPTH}"
+            checkpoint_file_path = model_urls[ckp_to_download]
+            logger.info("Load from imagenet pretrain.\nCheckpoint file path: {}".format(checkpoint_file_path))
+            checkpoint_epoch = load_checkpoint(
+                cfg,
+                checkpoint_file_path,
+                model,
+                model_ema,
+                cfg.NUM_GPUS*cfg.NUM_SHARDS > 1,
+                optimizer=None if cfg.TRAIN.FINE_TUNE else optimizer,
+                inflation=cfg.TRAIN.CHECKPOINT_INFLATE,
+                pre_process=cfg.TRAIN.CHECKPOINT_PRE_PROCESS.ENABLE
+            )
+        else:
+            raise NotImplementedError
+        start_epoch = 0 if cfg.TRAIN.FINE_TUNE else (checkpoint_epoch + 1)
     else:
         start_epoch = 0
     
     return start_epoch
+
+def convert_imagenet_weights(cfg, src, tgt):
+    tadaconv_enabled = cfg.VIDEO.BACKBONE.BRANCH.NAME in ["TAdaConvBlockAvgPool"]
+    src_converted = {}
+    for k, v in src.items():
+        if 'fc' in k:
+            continue
+        if len(k.split('.')) == 2:
+            mod, w_b = k.split('.')
+            if mod == "conv1":
+                # conv1.weight, torch.Size([64, 3, 7, 7]) 
+                # -> 
+                # backbone.conv1.a.weight, torch.Size([64, 3, 1, 7, 7])
+                new_k = f'backbone.conv1.a.{w_b}'
+                new_v = v.unsqueeze(2)
+            elif mod == "bn":
+                # bn1.weight, torch.Size([64])
+                # -> 
+                # backbone.conv1.a_bn.weight, torch.Size([64])
+                new_k = f'backbone.conv1.a_bn.{w_b}'
+                new_v = v
+        elif len(k.split('.')) == 4:
+            layer, block_id, mod, w_b = k.split('.')
+            layer_id = int(layer[-1]) + 1
+            block_id = int(block_id) + 1
+            mod_id = chr(ord('a') + int(mod[-1])-1)
+            if "conv" in mod:
+                # layer1.0.conv1.weight, torch.Size([64, 64, 1, 1])
+                # ->
+                # backbone.conv2.res_1.conv_branch.a.weight, torch.Size([64, 64, 1, 1, 1])
+                new_k = f'backbone.conv{layer_id}.res_{block_id}.conv_branch.{mod_id}.{w_b}'
+                if tadaconv_enabled and v.shape[-2:]!=(1,1):
+                    new_v = v.unsqueeze(0).unsqueeze(0)
+                else:
+                    new_v = v.unsqueeze(2)
+            elif "bn" in mod:
+                # layer1.0.bn1.weight, torch.Size([64])
+                # ->
+                # backbone.conv2.res_1.conv_branch.a_bn.weight, torch.Size([64])
+                new_k = f'backbone.conv{layer_id}.res_{block_id}.conv_branch.{mod_id}_bn.{w_b}'
+                new_v = v
+        elif len(k.split('.')) == 5:
+            layer, block_id, _, mod, w_b = k.split('.')
+            layer_id = int(layer[-1]) + 1
+            block_id = int(block_id) + 1
+            if mod == '0':
+                # layer1.0.downsample.0.weight, torch.Size([256, 64, 1, 1])
+                # -> 
+                # backbone.conv2.res_1.short_cut.weight, torch.Size([256, 64, 1, 1, 1])
+                new_k = f'backbone.conv{layer_id}.res_{block_id}.short_cut.{w_b}'
+                new_v = v.unsqueeze(2)
+            elif mod == '1':
+                new_k = f'backbone.conv{layer_id}.res_{block_id}.short_cut_bn.{w_b}'
+                new_v = v
+        
+        src_converted[new_k] = new_v
+    
+    # validate
+    for k, v in src_converted.items():
+        if k in tgt.state_dict().keys():
+            if not tgt.state_dict()[k].shape == v.shape:
+                logger.info(f"Size mismatch for converting from imagenet: should be {tgt.state_dict()[k].shape} for {k} instead of {v.shape}")
+        else:
+            logger.info(f"Didn't match any keys for {k}")
+    print("")
+    return {'model_state': src_converted}

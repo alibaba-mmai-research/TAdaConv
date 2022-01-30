@@ -1,4 +1,5 @@
 
+from email.policy import default
 import os
 import sys
 import json
@@ -8,14 +9,14 @@ import argparse
 
 # ---- config
 
-anno_conversion = False
-data_conversion = True
-
 anno_path = "" # where you put your annotation files
 data_path = "" # where you put original webm videos
 data_out_path = "" # where to put the converted mp4 videos
 
-def main(num_splits, split_id, split):
+def main(
+    anno_conversion, data_conversion, num_splits, split_id, split
+    anno_path, data_path, data_out_path
+):
 
     # ---- anno conversion
 
@@ -105,8 +106,16 @@ def main(num_splits, split_id, split):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process SSV2 annos and data.')
+    parser.add_argument('--anno', action='store_true')
+    parser.add_argument('--data', action='store_true')
     parser.add_argument('--num_splits', type=int, default=1)
     parser.add_argument('--split_id', type=int, default=0)
     parser.add_argument('--split', type=str, default="all")
+    parser.add_argument('--anno_path', type=str, default=anno_path)
+    parser.add_argument('--data_path', type=str, default=data_path)
+    parser.add_argument('--data_out_path', type=str, default=data_out_path)
     args = parser.parse_args()
-    main(args.num_splits, args.split_id, args.split)
+    main(
+        args.anno, args.data, args.num_splits, args.split_id, args.split,
+        args.anno_path, args.data_path, args.data_out_path
+    )

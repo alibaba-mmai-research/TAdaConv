@@ -34,12 +34,13 @@ def setup_logging(cfg, log_file):
     Sets up the logging for multiple processes. Only enable the logging for the
     master process, and suppress logging for the non-master processes.
     """
-    if du.is_master_proc():
+    if du.is_master_proc(du.get_world_size()):
         # Enable logging for the master process.
         logging.root.handlers = []
     else:
         # Suppress logging for non-master processes.
         _suppress_print()
+        return
 
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
@@ -49,7 +50,7 @@ def setup_logging(cfg, log_file):
         datefmt="%m/%d %H:%M:%S",
     )
 
-    if du.is_master_proc():
+    if du.is_master_proc(du.get_world_size()):
         ch = logging.StreamHandler(stream=sys.stdout)
         ch.setLevel(logging.DEBUG)
         ch.setFormatter(plain_formatter)
