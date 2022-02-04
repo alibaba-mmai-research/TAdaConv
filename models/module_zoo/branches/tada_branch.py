@@ -70,7 +70,8 @@ class TAdaConv2d(nn.Module):
     """
 
     def __init__(self, in_channels, out_channels, kernel_size,
-                 stride=1, padding=0, dilation=1, groups=1, bias=True):
+                 stride=1, padding=0, dilation=1, groups=1, bias=True,
+                 cal_dim="cin"):
         super(TAdaConv2d, self).__init__()
         """
         Args:
@@ -93,6 +94,7 @@ class TAdaConv2d(nn.Module):
         assert stride[0] == 1
         assert padding[0] == 0
         assert dilation[0] == 1
+        assert cal_dim in ["cin", "cout"]
 
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -101,13 +103,14 @@ class TAdaConv2d(nn.Module):
         self.padding = padding
         self.dilation = dilation
         self.groups = groups
+        self.cal_dim = cal_dim
 
         # base weights (W_b)
         self.weight = nn.Parameter(
             torch.Tensor(1, 1, out_channels, in_channels // groups, kernel_size[1], kernel_size[2])
         )
         if bias:
-            self.bias = nn.Parameter(torch.Tensor(out_channels))
+            self.bias = nn.Parameter(torch.Tensor(1, 1, out_channels))
         else:
             self.register_parameter('bias', None)
 
@@ -128,21 +131,32 @@ class TAdaConv2d(nn.Module):
         b, c_in, t, h, w = x.size()
         x = x.permute(0,2,1,3,4).reshape(1,-1,h,w)
 
-        # alpha: B, C, T, H(1), W(1) -> B, T, C, H(1), W(1) -> B, T, 1, C, H(1), W(1)
-        # corresponding to calibrating the input channel
-        weight = (alpha.permute(0,2,1,3,4).unsqueeze(2) * self.weight).reshape(-1, c_in, kh, kw)
+        if self.cal_dim == "cin":
+            # w_alpha: B, C, T, H(1), W(1) -> B, T, C, H(1), W(1) -> B, T, 1, C, H(1), W(1)
+            # corresponding to calibrating the input channel
+            weight = (alpha.permute(0,2,1,3,4).unsqueeze(2) * self.weight).reshape(-1, c_in//self.groups, kh, kw)
+        elif self.cal_dim == "cout":
+            # w_alpha: B, C, T, H(1), W(1) -> B, T, C, H(1), W(1) -> B, T, C, 1, H(1), W(1)
+            # corresponding to calibrating the input channel
+            weight = (alpha.permute(0,2,1,3,4).unsqueeze(3) * self.weight).reshape(-1, c_in//self.groups, kh, kw)
 
         bias = None
         if self.bias is not None:
-            raise NotImplementedError 
-        else:
-            output = F.conv2d(
-                x, weight=weight, bias=bias, stride=self.stride[1:], padding=self.padding[1:],
-                dilation=self.dilation[1:], groups=self.groups * b * t)
+            # in the official implementation of TAda2D, 
+            # there is no bias term in the convs
+            # hence the performance with bias is not validated
+            bias = self.bias.repeat(b, t, 1).reshape(-1)
+        output = F.conv2d(
+            x, weight=weight, bias=bias, stride=self.stride[1:], padding=self.padding[1:],
+            dilation=self.dilation[1:], groups=self.groups * b * t)
 
         output = output.view(b, t, c_out, output.size(-2), output.size(-1)).permute(0,2,1,3,4)
 
         return output
+        
+    def __repr__(self):
+        return f"TAdaConv2d({self.in_channels}, {self.out_channels}, kernel_size={self.kernel_size}, " +\
+            f"stride={self.stride}, padding={self.padding}, bias={self.bias is not None}, cal_dim=\"{self.cal_dim}\")"
 
 @BRANCH_REGISTRY.register()
 class TAdaConvBlockAvgPool(BaseBranch):

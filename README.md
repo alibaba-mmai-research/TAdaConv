@@ -33,8 +33,41 @@ This repository is released as part of the video understanding project [Essentia
 
 # Guidelines
 
+### Installation, data preparation and running
+
 The general pipeline for using this repo is the installation, data preparation and running.
 See [GUIDELINES.md](GUIDELINES.md).
+
+### Using TAdaConv2d in your video backbone
+
+To use TAdaConv2d in your video backbone, please follow the following steps:
+
+```python
+# 1. copy tada_branch somewhere in your project 
+#    and import TAdaConv2d, RouteFuncMLP
+from tada_branch import TAdaConv2d, RouteFuncMLP
+
+# 2. define tadaconv and the route func in your model
+def __init__(
+self.conv_rf = RouteFuncMLP(
+            c_in=64,            # number of input filters
+            ratio=4,            # reduction ratio for MLP
+            kernels=[3,3],      # list of temporal kernel sizes
+)
+self.conv = TAdaConv2d(
+            in_channels     = 64,
+            out_channels    = 64,
+            kernel_size     = [1, 3, 3], # usually the temporal kernel size is fixed to be 1
+            stride          = [1, 1, 1], # usually the temporal stride is fixed to be 1
+            padding         = [0, 1, 1], # usually the temporal padding is fixed to be 0
+            bias            = False,
+            cal_dim         = "cin"
+        )
+
+# 3. replace 'x = self.conv(x)' with the following 
+#    line in the self.forward(x) function
+x = self.conv(x, self.conv_rf(x))
+```
 
 # Model Zoo
 
