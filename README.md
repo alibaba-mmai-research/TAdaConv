@@ -47,31 +47,49 @@ To use TAdaConv2d in your video backbone, please follow the following steps:
 #    and import TAdaConv2d, RouteFuncMLP
 from tada_branch import TAdaConv2d, RouteFuncMLP
 
-# 2. define tadaconv and the route func in your model
-def __init__(
-self.conv_rf = RouteFuncMLP(
-            c_in=64,            # number of input filters
-            ratio=4,            # reduction ratio for MLP
-            kernels=[3,3],      # list of temporal kernel sizes
-)
-self.conv = TAdaConv2d(
-            in_channels     = 64,
-            out_channels    = 64,
-            kernel_size     = [1, 3, 3], # usually the temporal kernel size is fixed to be 1
-            stride          = [1, 1, 1], # usually the temporal stride is fixed to be 1
-            padding         = [0, 1, 1], # usually the temporal padding is fixed to be 0
-            bias            = False,
-            cal_dim         = "cin"
-        )
+class Model(nn.Module):
+  def __init__(self):
 
-# 3. replace 'x = self.conv(x)' with the following 
-#    line in the self.forward(x) function
-x = self.conv(x, self.conv_rf(x))
+    ...
+
+    # 2. define tadaconv and the route func in your model
+    self.conv_rf = RouteFuncMLP(
+                c_in=64,            # number of input filters
+                ratio=4,            # reduction ratio for MLP
+                kernels=[3,3],      # list of temporal kernel sizes
+    )
+    self.conv = TAdaConv2d(
+                in_channels     = 64,
+                out_channels    = 64,
+                kernel_size     = [1, 3, 3], # usually the temporal kernel size is fixed to be 1
+                stride          = [1, 1, 1], # usually the temporal stride is fixed to be 1
+                padding         = [0, 1, 1], # usually the temporal padding is fixed to be 0
+                bias            = False,
+                cal_dim         = "cin"
+            )
+
+     ...
+
+  def self.forward(x):
+
+    ...
+    
+    # 3. replace 'x = self.conv(x)' with the following line
+    x = self.conv(x, self.conv_rf(x))
+
+    ...
 ```
 
 # Model Zoo
 
-We include our pre-trained models in the [MODEL_ZOO.md](MODEL_ZOO.md).
+| Dataset | architecture | depth | #frames | acc@1 | acc@5 | checkpoint | config |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| SSV2 | TAda2D | R50 | 8 | 64.0 | 88.0 | [[google drive](https://drive.google.com/file/d/16y6dDf-hcMmJ2jDCV9tRla8aRJZKJXSk/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1CWy35SlWMbKnYqZXESndKg)(code:dlil)] | [tada2d_8f.yaml](configs/projects/tada/ssv2/tada2d_8f.yaml) | 
+| SSV2 | TAda2D | R50 | 16 | 65.6 | 89.1 | [[google drive](https://drive.google.com/file/d/1xwCxuFW6DZ0xpEsp_tFJYQRGuHPJe4uS/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1GKUKyDytaKKeCBAerh-4IQ)(code:f857)] | [tada2d_16f.yaml](configs/projects/epic-kitchen-ar/ek100/csn.yaml) | 
+| K400 | TAda2D | R50 | 8 x 8 | 76.7 | 92.6 | [[google drive](https://drive.google.com/file/d/1YsbTKLoDwxtStAsP5oxUMbIsw85NvY0O/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1rPPZtVDlEoftkg-r_Di59w)(code:p06d)] |  [tada2d_8x8.yaml](configs/projects/tada/k400/tada2d_8x8.yaml) |
+| K400 | TAda2D | R50 | 16 x 5 | 77.4 | 93.1 | [[google drive](https://drive.google.com/file/d/1UQDurxakmnDxa5D2tBuTqTH60BVyW3XM/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1MzFCZU1G1JR2ur9gWd3hCg)(code:6k8h)] | [tada2d_16x5.yaml](configs/projects/tada/k400/tada2d_16x5.yaml) |
+
+More of our pre-trained models are included in the [MODEL_ZOO.md](MODEL_ZOO.md).
 
 # Feature Zoo
 
