@@ -1,8 +1,11 @@
 _BASE: ../tada2d_ssv2.yaml
 TRAIN:
   FINE_TUNE: true
-  BATCH_SIZE: 8
+  BATCH_SIZE: 64
+  IMAGENET_INIT: true
   CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
 DATA:
   NUM_INPUT_FRAMES: 16
+OPTIMIZER:
+  BASE_LR: 0.24
 OUTPUT_DIR: output/tada2d_ssv2_16f

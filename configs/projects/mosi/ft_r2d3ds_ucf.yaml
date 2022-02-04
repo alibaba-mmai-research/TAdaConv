@@ -7,11 +7,11 @@ TRAIN:
   ENABLE: true
   DATASET: UCF101
   CHECKPOINT_FILE_PATH: ""          # !!@2
-  BATCH_SIZE: 128
+  BATCH_SIZE: 1024
 TEST:
   ENABLE: true
   DATASET: UCF101
-  BATCH_SIZE: 128
+  BATCH_SIZE: 1024
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/ucf101/videos/
   ANNO_DIR: /mnt/ziyuan/ziyuan/ucf101/annotations/

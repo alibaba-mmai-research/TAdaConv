@@ -6,14 +6,14 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET: ssv2
-  BATCH_SIZE: 16
+  BATCH_SIZE: 128
   FINE_TUNE: true
-  CHECKPOINT_DOWNLOAD_IMGNET: true
+  IMAGENET_INIT: true
   CHECKPOINT_FILE_PATH: ""
 TEST:
   ENABLE: true
   DATASET: ssv2
-  BATCH_SIZE: 16
+  BATCH_SIZE: 128
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/ssv2/
   ANNO_DIR: /mnt/ziyuan/ziyuan/ssv2/
@@ -43,4 +43,4 @@ OPTIMIZER:
   NESTEROV: true
 AUGMENTATION: 
   SSV2_FLIP: true
-NUM_GPUS: 16
+NUM_GPUS: 8

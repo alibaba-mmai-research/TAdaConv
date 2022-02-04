@@ -4,7 +4,7 @@ _BASE_MODEL: ../../pool/backbone/r2p1d.yaml
 TRAIN:
   ENABLE: true
   DATASET: HMDB51
-  BATCH_SIZE: 5
+  BATCH_SIZE: 5 # 5 per gpu
   LOG_FILE: training_log.log
   EVAL_PERIOD: 5
   NUM_FOLDS: 20

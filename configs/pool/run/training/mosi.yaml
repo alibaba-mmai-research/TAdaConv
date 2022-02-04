@@ -19,7 +19,7 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET:                          # !!@1
-  BATCH_SIZE: 10
+  BATCH_SIZE: 80 # 80 for 8 gpus
   LOG_FILE: training_log.log
   EVAL_PERIOD: 5
   NUM_FOLDS: 1
@@ -33,7 +33,7 @@ TRAIN:
 TEST:
   ENABLE: false                     # !!@3
   DATASET:                          # !!@3
-  BATCH_SIZE: 10
+  BATCH_SIZE: 80 # 80 for 8 gpus
   NUM_SPATIAL_CROPS: 1
   SPATIAL_CROPS: cc
   NUM_ENSEMBLE_VIEWS: 1

@@ -6,14 +6,14 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET: kinetics400
-  BATCH_SIZE: 16
+  BATCH_SIZE: 128
   FINE_TUNE: true
-  CHECKPOINT_DOWNLOAD_IMGNET: true
+  IMAGENET_INIT: true
   CHECKPOINT_FILE_PATH: ""          # !!@2
 TEST:
   ENABLE: true
   DATASET: kinetics400
-  BATCH_SIZE: 16
+  BATCH_SIZE: 128
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/kinetics400/
   ANNO_DIR: /mnt/ziyuan/ziyuan/kinetics400/
@@ -41,4 +41,4 @@ OPTIMIZER:
   OPTIM_METHOD: sgd
   DAMPENING: 0.0
   NESTEROV: true
-NUM_GPUS: 16
+NUM_GPUS: 8

@@ -6,7 +6,7 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET: imagenet
-  BATCH_SIZE: 10
+  BATCH_SIZE: 10 # 10 per gpu
   LOG_FILE: training_log.log
   EVAL_PERIOD: 5
   NUM_FOLDS: 20

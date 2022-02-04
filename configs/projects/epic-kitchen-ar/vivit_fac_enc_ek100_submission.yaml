@@ -6,11 +6,12 @@ PRETRAIN:
 TRAIN:
   ENABLE: false
   DATASET: epickitchen100
+  BATCH_SIZE: 256
   CHECKPOINT_FILE_PATH: ""
 TEST:
   ENABLE: false
   DATASET: epickitchen100
-  BATCH_SIZE: 4
+  BATCH_SIZE: 256
 SUBMISSION:
   ENABLE: true
   ACTION_CLASS_ENSUMBLE_METHOD: "sum" # sum or calculate

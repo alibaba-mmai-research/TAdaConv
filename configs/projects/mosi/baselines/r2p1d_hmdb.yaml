@@ -7,11 +7,11 @@ TRAIN:
   ENABLE: true
   DATASET: HMDB51
   CHECKPOINT_FILE_PATH: ""
-  BATCH_SIZE: 48
+  BATCH_SIZE: 384
 TEST:
   ENABLE: true
   DATASET: HMDB51
-  BATCH_SIZE: 48
+  BATCH_SIZE: 384
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/hmdb51/videos/
   ANNO_DIR: /mnt/ziyuan/ziyuan/hmdb51/anno_lists/
@@ -20,3 +20,4 @@ VIDEO:
     NUM_CLASSES: 51
     DROPOUT_RATE: 0.5
 OUTPUT_DIR: output/r2p1d_hmdb_from_scratch
+NUM_GPUS: 8

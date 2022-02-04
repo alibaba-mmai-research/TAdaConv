@@ -3,7 +3,7 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET:                          # !!@1
-  BATCH_SIZE: 128
+  BATCH_SIZE: 1024
   LOG_FILE: training_log.log
   LOSS_FUNC: cross_entropy
   EVAL_PERIOD: 5
@@ -18,7 +18,7 @@ TRAIN:
 TEST:
   ENABLE: true                     # !!@3
   DATASET:                          # !!@3
-  BATCH_SIZE: 128
+  BATCH_SIZE: 1024
   NUM_SPATIAL_CROPS: 1
   SPATIAL_CROPS: cc
   NUM_ENSEMBLE_VIEWS: 1

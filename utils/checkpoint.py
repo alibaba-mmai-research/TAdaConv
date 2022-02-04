@@ -577,7 +577,7 @@ def load_train_checkpoint(cfg, model, model_ema, optimizer, model_bucket=None):
         start_epoch = 0 if cfg.TRAIN.FINE_TUNE else (checkpoint_epoch + 1)
         if read_from_oss:
             bu.clear_tmp_file(checkpoint_path)
-    elif cfg.TRAIN.CHECKPOINT_FILE_PATH == "" and cfg.TRAIN.CHECKPOINT_DOWNLOAD_IMGNET:
+    elif cfg.TRAIN.CHECKPOINT_FILE_PATH == "" and cfg.TRAIN.IMAGENET_INIT:
         if cfg.VIDEO.BACKBONE.META_ARCH == "ResNet3D":
             model_urls = {
                 'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',

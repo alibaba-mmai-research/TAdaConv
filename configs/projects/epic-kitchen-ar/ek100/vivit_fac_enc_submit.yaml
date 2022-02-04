@@ -4,7 +4,7 @@ TRAIN:
   EVAL_PERIOD: 1
   CHECKPOINT_FILE_PATH: ./checkpoints/vivit_fac_enc_b16x2_pt_k700_ft_ek100_32x224x224_4630_public.pyth
   FINE_TUNE: true
-  BATCH_SIZE: 4
+  BATCH_SIZE: 256
 
 DATA:
   TRAIN_JITTER_SCALES: [336, 448]

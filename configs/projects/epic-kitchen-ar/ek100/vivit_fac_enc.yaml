@@ -4,7 +4,7 @@ TRAIN:
   EVAL_PERIOD: 1
   CHECKPOINT_FILE_PATH: "" # directory of pretrained models
   FINE_TUNE: true
-  BATCH_SIZE: 4
+  BATCH_SIZE: 128
   CHECKPOINT_PRE_PROCESS:
     ENABLE: true
     POP_HEAD: true

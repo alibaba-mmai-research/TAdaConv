@@ -6,12 +6,12 @@ PRETRAIN:
 TRAIN:
   ENABLE: true
   DATASET: epickitchen100
-  BATCH_SIZE: 8
+  BATCH_SIZE: 256
   CHECKPOINT_FILE_PATH: ""
 TEST:
   ENABLE: true
   DATASET: epickitchen100
-  BATCH_SIZE: 8
+  BATCH_SIZE: 256
 DATA:
   DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/EPIC-KITCHENS-100/clips_512/
   ANNO_DIR: /mnt/ziyuan/ziyuan/EPIC-KITCHENS-100/annos/epic-kitchens-100-annotations-master/

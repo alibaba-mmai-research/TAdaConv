@@ -1,6 +1,7 @@
 _BASE: ../tada2d_ssv2.yaml
 TRAIN:
   FINE_TUNE: true
+  IMAGENET_INIT: true
   CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
 DATA:
   NUM_INPUT_FRAMES: 8
