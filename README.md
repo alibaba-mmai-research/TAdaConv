@@ -44,9 +44,9 @@ See [GUIDELINES.md](GUIDELINES.md).
 To use TAdaConv2d in your video backbone, please follow the following steps:
 
 ```python
-# 1. copy tada_branch somewhere in your project 
+# 1. copy models/module_zoo/ops/tadaconv.py somewhere in your project 
 #    and import TAdaConv2d, RouteFuncMLP
-from tada_branch import TAdaConv2d, RouteFuncMLP
+from tadaconv import TAdaConv2d, RouteFuncMLP
 
 class Model(nn.Module):
   def __init__(self):
@@ -81,6 +81,19 @@ class Model(nn.Module):
     ...
 ```
 
+**Initialization weight factorization.** To use pre-trained weights of existing models, the weights for TAdaConv2d needs a bit factorization. The original shape of convolution weights `Ci x Co x k x k` needs to be expanded to `1 x 1 x Ci x Co x k x k`. An option is to `.unsqueeze(0)` the weight twice. See `convert_imagenet_weights` in `utils/checkpoint.py` for more details. 
+
+**Avoiding initializing layers that need to be skipped in initialization.** The weights in the last layer in `RouteFuncMLP` is initialized as zeros, and those layers are marked with `conv.skip=True`. Make sure your codes do not alter the initial states of the RouteFuncMLP if you are to use it in your pre-trained models, by skipping the initialization for those convs as follows:
+
+```python
+def your_initialization_function(model, ....):
+  for m in model.modules():
+    if hasattr(m, "skip_init") and m.skip_init:
+      continue
+    # your initialization codes next
+    ...
+```
+
 # Model Zoo
 
 | Dataset | architecture | depth | #frames | acc@1 | acc@5 | checkpoint | config |
@@ -99,6 +112,10 @@ We include strong features for action localization on [HACS](http://hacs.csail.m
 # Contributors
 
 This codebase is written and maintained by [Ziyuan Huang](https://huang-ziyuan.github.io/), [Zhiwu Qing](https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN) and [Xiang Wang](https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN). 
+
+# Acknowledgement
+
+Parts of the code are built upon [SlowFast](https://github.com/facebookresearch/SlowFast), [timm](https://github.com/rwightman/pytorch-image-models), [CoCLR](https://github.com/TengdaHan/CoCLR), and [BMN](https://github.com/JJBOY/BMN-Boundary-Matching-Network) repositories.
 
 ## Citations
 If you find our codebase useful, please consider citing the respective work :).
