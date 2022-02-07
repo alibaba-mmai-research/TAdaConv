@@ -7,8 +7,7 @@ This repository provides the official pytorch implementation of the following pa
 
 - **[TAda! Temporally-Adaptive Convolutions for Video Understanding](https://arxiv.org/pdf/2110.06178.pdf), ICLR 2022 [[Website](https://tadaconv-iclr2022.github.io)]**<br> 
 
-- **[Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition](https://arxiv.org/pdf/2106.05058), CVPRW 2021**<br>
-*Rank 2 submission to [EPIC-KITCHENS-100 Action Recognition challenge](https://competitions.codalab.org/competitions/25923#results)*
+- **[Towards Training Stronger Video Vision Transformers for EPIC-KITCHENS-100 Action Recognition](https://arxiv.org/pdf/2106.05058)**<br>**CVPRW 2021** *Rank 2 submission to [EPIC-KITCHENS-100 Action Recognition challenge](https://competitions.codalab.org/competitions/25923#results)*
 
 ### Self-supervised video representation learning
 
@@ -18,7 +17,7 @@ This repository provides the official pytorch implementation of the following pa
 
 ### Temporal Action Localization
 
-- **[A Stronger Baseline for Ego-Centric Action Detection](https://arxiv.org/pdf/2106.06942), CVPRW 2021**<br>
+- **[A Stronger Baseline for Ego-Centric Action Detection](https://arxiv.org/pdf/2106.06942)**<br>**CVPRW 2021**
 *Rank 1 submission to [EPIC-KITCHENS-100 Action Detection Challenge](https://competitions.codalab.org/competitions/25926#results)*
 
 # About
@@ -26,6 +25,8 @@ This repository provides the official pytorch implementation of the following pa
 This repository is released as part of the video understanding project [EssentialMC2](https://github.com/alibaba/EssentialMC2) from [DAMO Academy](https://damo.alibaba.com/?lang=en). [EssentialMC2](https://github.com/alibaba/EssentialMC2) provides industry-level solutions to video understanding problems, which includes representation learning, relation reasoning and openset life-long learning. 
 
 # Latest
+
+[2022-02] TAda2D features for action localization released.
 
 [2022-01] TAdaConv accepted to ICLR 2022.
 
