@@ -11,15 +11,15 @@
 ## Something-Something
 | Dataset | architecture | depth | init | clips x crops | #frames | acc@1 | acc@5 | checkpoint | config |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 8 | 64.0 | 88.0 | [[google drive](https://drive.google.com/file/d/16y6dDf-hcMmJ2jDCV9tRla8aRJZKJXSk/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1CWy35SlWMbKnYqZXESndKg)(code:dlil)] | [tada2d_8f.yaml](configs/projects/tada/ssv2/tada2d_8f.yaml) | 
-| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 16 | 65.6 | 89.1 | [[google drive](https://drive.google.com/file/d/1xwCxuFW6DZ0xpEsp_tFJYQRGuHPJe4uS/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1GKUKyDytaKKeCBAerh-4IQ)(code:f857)] | [tada2d_16f.yaml](configs/projects/epic-kitchen-ar/ek100/csn.yaml) | 
+| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 8 | 64.2 | 88.0 | [[google drive](https://drive.google.com/file/d/16y6dDf-hcMmJ2jDCV9tRla8aRJZKJXSk/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1CWy35SlWMbKnYqZXESndKg)(code:dlil)] | [tada2d_8f.yaml](configs/projects/tada/ssv2/tada2d_8f.yaml) | 
+| SSV2 | TAda2D | R50 | IN-1K | 2 x 3 | 16 | 65.6 | 89.1 | [[google drive](https://drive.google.com/file/d/1xwCxuFW6DZ0xpEsp_tFJYQRGuHPJe4uS/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1GKUKyDytaKKeCBAerh-4IQ)(code:f857)] | [tada2d_16f.yaml](configs/projects/tada/ssv2/tada2d_16f.yaml) | 
 
 ## Epic-Kitchens Action Recognition
 
 | architecture | init | resolution | clips x crops | #frames x sampling rate | action acc@1 | verb acc@1 | noun acc@1 | checkpoint | config |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | 
 | ViViT Fact. Enc.-B16x2 | K700 | 320 | 4 x 3 | 32 x 2 | 46.3 | 67.4 | 58.9 | [[google drive](https://drive.google.com/file/d/1ELvwZYeqdsPmDcX1v7_RbFqbQnvHt9sB/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1zOtIAY6neFshmkPR9SuX8g)(code:rinh)] | [vivit_fac_enc.yaml](configs/projects/epic-kitchen-ar/ek100/vivit_fac_enc.yaml) |
-| ir-CSN-R152 | K700 | 224 | 10 x 3 | 32 x 2 | 44.5 | 68.4 | 55.9 | [[google drive](https://drive.google.com/file/d/1YEIhijzN2aFXyfDL34WB6Q9strYP7WaU/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1swVIBJInQ75dUZKV-OJwlg)(code:s0uj)] | [csn.yaml](configs/projects/competition/ek100/csn.yaml) | 
+| ir-CSN-R152 | K700 | 224 | 10 x 3 | 32 x 2 | 44.5 | 68.4 | 55.9 | [[google drive](https://drive.google.com/file/d/1YEIhijzN2aFXyfDL34WB6Q9strYP7WaU/view?usp=sharing)][[baidu](https://pan.baidu.com/s/1swVIBJInQ75dUZKV-OJwlg)(code:s0uj)] | [csn.yaml](configs/projects/epic-kitchen-ar/ek100/csn.yaml) | 
 
 ## Epic-Kitchens Temporal Action Localization
 
