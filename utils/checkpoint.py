@@ -621,7 +621,7 @@ def convert_imagenet_weights(cfg, src, tgt):
                 # backbone.conv1.a.weight, torch.Size([64, 3, 1, 7, 7])
                 new_k = f'backbone.conv1.a.{w_b}'
                 new_v = v.unsqueeze(2)
-            elif mod == "bn":
+            elif mod == "bn1":
                 # bn1.weight, torch.Size([64])
                 # -> 
                 # backbone.conv1.a_bn.weight, torch.Size([64])
