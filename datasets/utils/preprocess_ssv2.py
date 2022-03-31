@@ -14,7 +14,7 @@ data_path = "" # where you put original webm videos
 data_out_path = "" # where to put the converted mp4 videos
 
 def main(
-    anno_conversion, data_conversion, num_splits, split_id, split
+    anno_conversion, data_conversion, num_splits, split_id, split,
     anno_path, data_path, data_out_path
 ):
 
