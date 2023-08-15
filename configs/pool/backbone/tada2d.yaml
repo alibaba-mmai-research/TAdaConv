@@ -22,7 +22,7 @@ VIDEO:
     STEM:
       NAME: Base2DStem
     BRANCH:
-      NAME: TAdaConvBlockAvgPool
+      NAME: TAda2DBlock
       ROUTE_FUNC_K: [3, 3]
       ROUTE_FUNC_R: 4
       POOL_K: [3, 1, 1]

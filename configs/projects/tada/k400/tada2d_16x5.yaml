@@ -2,7 +2,7 @@ _BASE: ../tada2d_k400.yaml
 TRAIN:
   FINE_TUNE: true
   BATCH_SIZE: 64
-  IMAGENET_INIT: true
+  INIT: in1k
   CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
 OPTIMIZER:
   BASE_LR: 0.12

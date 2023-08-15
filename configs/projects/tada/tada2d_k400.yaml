@@ -8,7 +8,7 @@ TRAIN:
   DATASET: kinetics400
   BATCH_SIZE: 128
   FINE_TUNE: true
-  IMAGENET_INIT: true
+  INIT: in1k
   CHECKPOINT_FILE_PATH: ""          # !!@2
 TEST:
   ENABLE: true

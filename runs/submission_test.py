@@ -9,14 +9,14 @@ import pickle
 import torch
 import json
 
-import utils.bucket as bu
-import utils.checkpoint as cu
-import utils.distributed as du
-import utils.logging as logging
-import utils.misc as misc
-from datasets.base.builder import build_loader
-from models.base.builder import build_model
-from utils.meters import TestMeter, EpicKitchenMeter
+import tadaconv.utils.bucket as bu
+import tadaconv.utils.checkpoint as cu
+import tadaconv.utils.distributed as du
+import tadaconv.utils.logging as logging
+import tadaconv.utils.misc as misc
+from tadaconv.datasets.base.builder import build_loader
+from tadaconv.models.base.builder import build_model
+from tadaconv.utils.meters import TestMeter, EpicKitchenMeter
 
 logger = logging.get_logger(__name__)
 

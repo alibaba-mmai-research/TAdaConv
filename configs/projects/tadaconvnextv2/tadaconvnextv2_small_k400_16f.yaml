@@ -1,0 +1,76 @@
+_BASE_RUN: ../../pool/run/training/from_scratch_large.yaml
+_BASE_MODEL: ../../pool/backbone/tadaconvnextv2_small.yaml
+
+PRETRAIN:
+  ENABLE: false
+TRAIN:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 64 #total batch size: 64x4=256
+  FINE_TUNE: true
+  LR_REDUCE: true
+  INIT: in1k
+  CHECKPOINT_FILE_PATH: ""
+TEST:
+  ENABLE: true
+  DATASET: kinetics400
+  BATCH_SIZE: 256
+DATA:
+  DATA_ROOT_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  ANNO_DIR: /mnt/ziyuan/ziyuan/kinetics400/
+  SAMPLING_RATE: 5
+  NUM_INPUT_FRAMES: 16
+  TRAIN_JITTER_SCALES: [0.08, 1.0]
+  TRAIN_CROP_SIZE: 224
+  TEST_SCALE: 256
+  TEST_CROP_SIZE: 256
+VIDEO:
+  BACKBONE:
+    DROP_PATH: 0.4
+  HEAD:
+    NUM_CLASSES: 400
+    DROPOUT_RATE: 0.5
+
+OUTPUT_DIR: output/tadaconvnextv2_small_k400_16f
+
+OPTIMIZER:
+  BASE_LR: 2.5e-4
+  ADJUST_LR: false
+  LR_POLICY: cosine
+  MAX_EPOCH: 100
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.02
+  WARMUP_EPOCHS: 8
+  WARMUP_START_LR: 1e-6
+  OPTIM_METHOD: adamw
+  DAMPENING: 0.0
+  NESTEROV: true
+  HEAD_LRMULT: 10
+  NEW_PARAMS: ["dwconv_rf", "norm_avgpool"]
+  NEW_PARAMS_MULT: 10
+AUGMENTATION: 
+  COLOR_AUG: true
+  GRAYSCALE: 0.2
+  COLOR_P: 0.0
+  CONSISTENT: true
+  SHUFFLE: true
+  GRAY_FIRST: false
+  IS_SPLIT: false
+  USE_GPU: false
+  SSV2_FLIP: true
+  RATIO: [0.75, 1.333]
+  MIXUP: 
+    ENABLE: false
+  CUTMIX: 
+    ENABLE: false
+  RANDOM_ERASING:
+    ENABLE: false
+  LABEL_SMOOTHING: 0.0
+  AUTOAUGMENT:
+    ENABLE: true
+    BEFORE_CROP: true
+    TYPE: rand-m9-n4-mstd0.5-inc1
+NUM_GPUS: 8
+DATA_LOADER:
+  NUM_WORKERS: 12
+  PIN_MEMORY: true

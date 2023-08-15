@@ -1,0 +1,25 @@
+MODEL:
+  NAME: TAdaConvNeXtV2-Tiny
+VIDEO:
+  BACKBONE:
+    DEPTH: [3, 3, 9, 3]
+    META_ARCH: ConvNeXt
+    NUM_FILTERS: [96, 192, 384, 768]
+    NUM_INPUT_CHANNELS: 3
+    NUM_OUT_FEATURES: 768
+    DROP_PATH: 0.2
+    LARGE_SCALE_INIT_VALUE: 1e-6
+    STEM:
+      T_KERNEL_SIZE: 3
+      T_STRIDE: 2
+    BRANCH:
+      NAME: TAdaConvNeXtV2Block
+      ROUTE_FUNC_K: [3, 3]
+      ROUTE_FUNC_R: 2
+      HEAD_DIM: 48
+  HEAD:
+    NAME: BaseHead
+    ACTIVATION: softmax
+    DROPOUT_RATE: 0
+    NUM_CLASSES:              # !!!
+

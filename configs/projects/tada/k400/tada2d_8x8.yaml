@@ -1,7 +1,7 @@
 _BASE: ../tada2d_k400.yaml
 TRAIN:
   FINE_TUNE: true
-  IMAGENET_INIT: true
+  INIT: in1k
   CHECKPOINT_FILE_PATH: "" # pretrained imagenet weights
 DATA:
   SAMPLING_RATE: 8

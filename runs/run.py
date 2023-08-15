@@ -8,14 +8,14 @@ import sys
 import time
 sys.path.append(os.path.abspath(os.curdir))
 
-from utils.launcher import launch_task
+from tadaconv.utils.launcher import launch_task
 
 from test import test
 from train import train
 from test_epic_localization import test_epic_localization
 from submission_test import submission_test
 
-from utils.config import Config
+from tadaconv.utils.config import Config
 
 def _prepare_data(cfg):
     if cfg.TASK_TYPE in ['classification']:

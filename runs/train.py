@@ -9,21 +9,21 @@ import os
 import oss2 as oss
 import torch.nn as nn
 
-import models.utils.losses as losses
-import models.utils.optimizer as optim
-import utils.checkpoint as cu
-import utils.tensor as tu
-import utils.distributed as du
-import utils.logging as logging
-import utils.metrics as metrics
-import utils.misc as misc
-import utils.bucket as bu
-from utils.meters import TrainMeter, ValMeter
+import tadaconv.models.utils.losses as losses
+import tadaconv.models.utils.optimizer as optim
+import tadaconv.utils.checkpoint as cu
+import tadaconv.utils.tensor as tu
+import tadaconv.utils.distributed as du
+import tadaconv.utils.logging as logging
+import tadaconv.utils.metrics as metrics
+import tadaconv.utils.misc as misc
+import tadaconv.utils.bucket as bu
+from tadaconv.utils.meters import TrainMeter, ValMeter
 
-from models.base.builder import build_model
-from datasets.base.builder import build_loader, shuffle_dataset
+from tadaconv.models.base.builder import build_model
+from tadaconv.datasets.base.builder import build_loader, shuffle_dataset
 
-from datasets.utils.mixup import Mixup
+from tadaconv.datasets.utils.mixup import Mixup
 
 logger = logging.get_logger(__name__)
 

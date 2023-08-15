@@ -1,0 +1,29 @@
+MODEL:
+  NAME: TAdaFormer_B16
+  
+VIDEO:
+  BACKBONE:
+    META_ARCH: VisionTransformer
+    INPUT_RES: 224
+    PATCH_SIZE: 16
+    TUBLET_SIZE: 3
+    TUBLET_STRIDE: 2
+    NUM_FEATURES: 768
+    NUM_OUT_FEATURES: 768
+    DEPTH: 12
+    NUM_HEADS: 12
+    DROP_PATH: 0.0
+    ATTN_DROPOUT: 0.0
+    REQUIRE_PROJ: false
+    ATTN_MASK_ENABLE: false
+    DOUBLE_TADA: false
+    FREEZE: false
+    REDUCTION: 2
+    BRANCH: 
+      NAME: TAdaFormerBlock
+      ROUTE_FUNC_K: [3, 3]
+      ROUTE_FUNC_R: 2
+    TEMP_ENHANCE: false
+  HEAD:
+    NAME: BaseHead
+    OUTPUT_DIM: 512

@@ -11,17 +11,17 @@ import json
 import math
 import time
 
-import utils.bucket as bu
-import utils.checkpoint as cu
-import utils.tensor as tu
-import utils.distributed as du
-import utils.logging as logging
-import utils.misc as misc
-import utils.tal_tools as tal_tools
-from datasets.base.builder import build_loader
-from models.base.builder import build_model
-from utils.meters import TestMeter
-from utils.eval_tal.eval_tal import evaluate_detection
+import tadaconv.utils.bucket as bu
+import tadaconv.utils.checkpoint as cu
+import tadaconv.utils.tensor as tu
+import tadaconv.utils.distributed as du
+import tadaconv.utils.logging as logging
+import tadaconv.utils.misc as misc
+import tadaconv.utils.tal_tools as tal_tools
+from tadaconv.datasets.base.builder import build_loader
+from tadaconv.models.base.builder import build_model
+from tadaconv.utils.meters import TestMeter
+from tadaconv.utils.eval_tal.eval_tal import evaluate_detection
 
 logger = logging.get_logger(__name__)
 
