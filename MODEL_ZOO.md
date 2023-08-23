@@ -14,7 +14,7 @@
 
 ### Kinetics 400
 | arch. | pt. |#frames | GFLOPS | top1 | ckp. |
-| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | 
 | TAdaConvNeXtV2-T | IN1K | 16 | 47x3x4 | 79.6 | [ckp](https://drive.google.com/file/d/1_jkIOP8kYeMzgEGyVznDKXNRG2tSEOkV/view?usp=sharing) |
 | TAdaConvNeXtV2-T | IN1K | 32 | 94x3x4 | 80.8 | [ckp](https://drive.google.com/file/d/1FSpmNgDETQ0WchABBUgpTLG9q3N9xBHN/view?usp=sharing) |
 | TAdaConvNeXtV2-S | IN1K | 16 | 91x3x4 | 80.8 | [ckp](https://drive.google.com/file/d/12R74tV2-VRRUxrH0Tubki5voRSCbR3F1/view?usp=sharing) |
@@ -25,7 +25,7 @@
 | TAdaConvNeXtV2-B | IN21K | 32 | 324x3x4 | **83.7** | [ckp](https://drive.google.com/file/d/1yyCKDa144iL1TsibNDFHaNW0dap2Xjpz/view?usp=sharing) |
 
 | arch. | pt. |#frames | GFLOPS | top1 | ckp. |
-| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | 
 | TAdaFormer-B/16 | CLIP | 16 | 153x3x4 | 84.5 | [ckp](https://drive.google.com/file/d/1E7IE762YLJnfeiqtjv0jBb91_dZhNK0Q/view?usp=sharing) | 
 | TAdaFormer-L/14 | CLIP | 16 | 703x3x4 | 87.6 | [ckp](https://drive.google.com/file/d/1chSLHo0nbFNObsLlCRSsAJE2vbYwIaYJ/view?usp=sharing) | 
 | TAdaFormer-B/16 | CLIP+K710 | 16 | 153x3x4 | 86.6 | [ckp](https://drive.google.com/file/d/1pAhjXycxdT_eOH5kO-5t7y8o5MjtlQdZ/view?usp=sharing) |
@@ -36,7 +36,7 @@
 ### Something-Something
 The checkpoints in this part is provided for SSV2. 
 | arch. | pt. |#frames | GFLOPS | SSV1 | SSV2 | ckp. |
-| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | 
 | TAdaConvNeXtV2-T | IN1K+K400 | 16 | 47x3x2 | 54.1 | 67.2 | [ckp](https://drive.google.com/file/d/1IZaJ4EDrniK4ZxVYnl_2Y6qpx1F6UjqY/view?usp=sharing) |
 | TAdaConvNeXtV2-T | IN1K+K400 | 32 | 94x3x2 | 56.4 | 69.8 | [ckp](https://drive.google.com/file/d/1WDJ5iMyR9VTkfeIoZwICtiJ8BSQ8u4gp/view?usp=sharing) | 
 | TAdaConvNeXtV2-S | IN1K+K400 | 16 | 91x3x2 | 55.6 | 68.4 | [ckp](https://drive.google.com/file/d/1X94evPniWrjJfs38-SKPWehVZtYD3Xu7/view?usp=sharing) |
