@@ -24,6 +24,8 @@ This repository provides the official pytorch implementation of the following pa
 
 # Latest
 
+[2023-08] 🔥 Released models for TAdaConvNeXtV2 and TAdaFormer. See [MODEL_ZOO](MODEL_ZOO.md) and have a try!
+
 [2023-08] Released code for TAdaConvNeXtV2 and TAdaFormer. 
 
 [2022-02] TAda2D features for action localization released.
